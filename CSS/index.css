@@ -37,6 +37,7 @@ body{
 }
 
 header{
+    position: sticky;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -189,11 +190,13 @@ section:nth-child(even){
     margin-top: 1rem;
     padding: 15px 30px;
     width: max-content;
+    border: none;
     border-radius: 0.25rem;
     font-weight: 600;
     color: var(--honeydew);
     background-color: var(--Crimson-Red);
     transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .cta-btn:hover{
@@ -377,87 +380,63 @@ section:nth-child(even){
 
 .testimonies{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .testimonies .container{
-    max-width: 1100px;
+    height: auto;
     width: 100%;
-    padding: 0 30px;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
 }
 
-.testimony{
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.testimony .head{
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.testimony .swiper-wrapper{
+.container .testimony{
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0,0.15);
     display: flex;
-    justify-content: space-between;
-}
-
-.testimony .swiper-wrapper .swiper-slide{
-    width: 100%;
-}
-
-.testimony .wrapper{
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 60px;
-    padding: 30px 0;
-}
-
-.testimony .thumbnail{
-    width: 150px;
-    height: 150px;
+    flex-direction: column;
+    border-radius: 0.45rem;
+    padding: 1rem;
     position: relative;
-    flex-shrink: 0;
 }
 
-.testimony .thumbnail img{
+
+
+.container .image{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 1em auto;
+    margin-bottom: 3em;
+    border: 2px solid var(--Crimson-Red);
+
+}
+
+.image img{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
 }
 
-.testimony .thumbnail::before{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: calc(100% + 30px);
-    height: calc(100% + 10px);
-    background-color: var(--Crimson-Red);
-    border-radius: 33% 67% 50% 50% / 50% 14% 86% 50%;
-    z-index: -1;
+.content{
+    margin-bottom: 2rem;
 }
 
-.testimony .aside{
-    position: relative;
-    padding-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-self: flex-end;
-}
-
-.testimony .aside > p{
-    position: relative;
+.testimony .content p{
+    color: var(--Dark-text);
+    opacity: 0.8;
     font-size: 14px;
     line-height: normal;
     margin-bottom: 30px;
+    position: relative;
 }
 
-.testimony .aside > p::before,
-.testimony .aside > p::after{
+.content p::before,
+.content p::after{
     font-family: serif;
     font-size: 80px;
     font-weight: 800;
@@ -468,23 +447,31 @@ section:nth-child(even){
     z-index: -1;
 }
 
-.testimony .aside > p::before{
+.content p::before{
     content: open-quote;
     top: -45px;
     left: 0;
-
 }
-.testimony .aside > p::after{
+
+.content p::after{
     content: close-quote;
+    bottom: -30px;
     right: 0;
 }
 
-.testimony .aside .name h4{
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--Crimson-Red);
+.container .name{
+    position: absolute;
+    color: var(--cerulean);
     opacity: 0.8;
+    bottom: 1rem;
+    right: 10px;
 }
+
+.name h4{
+    font-weight: 600;
+    font-size: 14px;
+}
+
 
 footer{
     background-color: #222;
@@ -529,8 +516,8 @@ footer ul li a{
 
 .footer-socials ul{
     display: flex;
-    gap: 10px;
-    margin-top: 2.5rem;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .footer-socials ul li{
@@ -554,15 +541,18 @@ footer ul li a{
 }
 
 .footer-subscribe form{
+    display: flex;
+    height: 45px;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 5rem;
     background-color: var(--Muted-gray);
     border-radius: 0.25rem;
     overflow: hidden;
 }
 
 .footer-subscribe input{
-    width: 100%;
+    width: 70%;
+    height: 100%;
     padding: 10px 15px;
     border: none;
     outline: none;
@@ -575,7 +565,8 @@ footer ul li a{
 }
 
 .footer-subscribe button{
-    width: 100%;
+    width: 30%;
+    height: 100%;
     outline: none;
     border: none;
     padding: 10px 15px;
@@ -604,11 +595,12 @@ header nav{
     header nav.active{
         display: block;
         position: absolute;
-        top: 75px;
+        top: 85px;
         right: 30px;
-        min-width: 200px;
+        min-width: 50%;
         height: auto;
         background: var(--honeydew);
+    
         flex-direction: column;
         padding: 1rem;
     }
@@ -716,13 +708,26 @@ header nav{
         padding-right: 1rem;
     }
 
+    .footer-socials{
+        align-items: flex-start;
+    }
+
     .footer-socials ul{
         margin-top: 0.5rem;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .footer-subscribe form{
+        margin-top: 1rem;
     }
 }
 
 
 @media screen and (width <= 768px) {
+    header nav.active{
+        width: 50%;
+    }
 
     .services .container .service h4{
         font-size: 1.3rem;
@@ -740,5 +745,21 @@ header nav{
     .testimony .thumbnail{
         width: 200px;
         height: 200px;
+    }
+}
+
+@media screen and (max-width: 600px){
+
+    header nav.active{
+        width: 90%;
+        right: 10px;
+        margin: 0 auto;
+    }
+    footer{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footer-socials{
+        display: inherit;
     }
 }
