@@ -1,0 +1,125 @@
+:root{
+    --Berkeley-blue: #1d3557;
+    --cerulean: #457b9dff;
+    --Electric-Blue: #0074cc;
+    --non-photo-blue: #a8dadcff;
+    --honeydew: #f1faeeff;
+    --charcoal-gray: #aaaaaa;
+    --Gold: #ff9a17;
+    --red-pantone: rgb(255, 107, 119);
+    --Crimson-Red: #e63946;
+    --White-text: #fff;
+    --Dark-text: #000011;
+    --Muted-gray: #afafaf;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+header{
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    width: 100%;
+    color: var(--Dark-text);
+    box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+    flex-shrink: 0;
+}
+
+.logo{
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family : 'Arial Narrow', Arial, sans-serif;
+}
+
+.logo span{
+    color: var(--Berkeley-blue);
+}
+
+header nav{
+    display: flex;
+    align-items: center;
+}
+
+header nav ul{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+header nav ul li{
+    padding: 10px 15px;
+    border-radius: 0.25rem;
+    transition: all 400ms ease;
+}
+
+header nav ul li:hover{
+    background-color: var(--Crimson-Red);
+}
+
+header nav ul li:hover a{
+    color: var(--honeydew);
+}
+
+header nav ul li a{
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--Dark-text);
+}
+
+.header-buttons button{
+    display: none;
+}
+
+@media screen and (width < 991px) {
+    header nav{
+        display: none;
+    }
+    
+        header nav.active{
+            display: block;
+            position: absolute;
+            top: 85px;
+            right: 30px;
+            min-width: 50%;
+            height: auto;
+            background: var(--honeydew);
+        
+            flex-direction: column;
+            padding: 1rem;
+        }
+    
+        header nav ul{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+    
+        header nav ul li{
+            text-align: center;
+            width: 100%;
+        }
+
+        .header-buttons{
+            display: block;
+        }
+    
+        .header-buttons .toggle{
+            display: block;
+            border: none;
+            background: transparent;
+            font-size: 3rem;
+        }
+    }    
