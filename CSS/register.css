@@ -24,6 +24,8 @@
 
 body{
     font-family: sans-serif;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 header{
@@ -83,6 +85,138 @@ header nav ul li a{
     display: none;
 }
 
+main{
+    padding: 1rem;
+}
+
+
+.container{
+    width: 800px;
+    height: auto;
+    background-color: var(--Berkeley-blue);
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    border-radius: 0.35rem;
+    overflow: hidden;
+    box-shadow: 0 0 8px 4px rgba(0,0,0, 0.1);
+}
+
+.container .left{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.left img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.right{
+
+    width: 50%;
+}
+
+.right form{
+    padding: 1rem;
+    width: 100%;
+    background-color: #fff;
+}
+
+.right h1,
+.right p{
+    text-align: center;
+}
+
+.right h1{
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.right p{
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+form .input-group{
+    margin-bottom: 0.5rem;
+}
+
+form .input-group label{
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;    
+} 
+
+form .input-group input{
+    width: 100%;
+    height: 35px;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+
+form .input-group button{
+    
+    width: 40%;
+    height: 45px;
+    background-color: var(--Crimson-Red);
+    border: none;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1.1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form .input-group button:hover{
+    background-color: var(--red-pantone);
+}
+
+.social-register {
+    margin-bottom: 2rem;
+}
+
+.social-register .socials ul{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.socials ul li{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.socials ul li a{
+    color: var(--Dark-text);
+    font-size: 1.5rem;
+}
+
+.socials ul li:hover{
+    background-color: var(--Muted-gray);
+}
+
+.socials ul li:hover a{
+    color: var(--honeydew);
+}
+
 @media screen and (width < 991px) {
     header nav{
         display: none;
@@ -122,4 +256,42 @@ header nav ul li a{
             background: transparent;
             font-size: 3rem;
         }
+
+        body{
+            font-size: 97.5%;
+        }
+
     }    
+    
+    
+    @media screen and (max-width: 800px) {
+        .container{
+            flex-direction: column;
+            width: 700px;
+        }
+
+        .container .left{
+            width: 100%;
+            height: 30%;
+        }
+
+        .container .right{
+            width: 100%;
+            height: 50%;
+        }
+
+    }
+
+    @media screen and (max-width: 768px) {
+        .container{
+            width: auto;
+        }
+
+        .container .left{
+            display: none;
+        }
+
+        form .input-group input{
+            height: 50px;
+        }
+    }
