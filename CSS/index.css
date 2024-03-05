@@ -38,6 +38,7 @@ body{
 
 header{
     position: sticky;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -595,7 +596,7 @@ header nav{
     header nav.active{
         display: block;
         position: absolute;
-        top: 85px;
+        top: 65px;
         right: 30px;
         min-width: 50%;
         height: auto;
@@ -639,6 +640,13 @@ header nav{
         border: none;
         background: transparent;
         font-size: 3rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .toggle svg{
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
     section,
