@@ -14,21 +14,57 @@
     <header>
         <h4 class="logo">Earn<span>Logix</span></h4>
         <div class="header-buttons">
-          <button class="toggle"><i class="bx bx-menu"></i></button>
+          <button class="toggle"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg></button>
         </div>
         <nav>
           <ul>
             <li>
-              <a href="#">Home</a>
+              <a href="index.html">Home</a>
             </li>
             <li>
-              <a href="#about">About</a>
+              <a href="about.html">About</a>
             </li>
             <li>
-              <a href="#faq">FAQ</a>
+              <a href="faq.html">FAQ</a>
             </li>
           </ul>
         </nav>
     </header>
+    <main>
+      <section class="container">
+          <div class="left">
+              <form>
+                  <h1>Sign In</h1>
+                  <p>Sign in using email</p>
+
+                  <div class="input-group">
+                      <label for="email">Email Address</label>
+                      <input type="email" id="email" placeholder="Enter your email" required>
+                  </div>
+  
+                  <div class="input-group">
+                      <label for="password">Password</label>
+                      <input type="password" id="password" placeholder="Enter your password" required>
+                  </div>
+  
+                  <div class="input-group">
+                      <button onclick="validateInput()">Sign In</button>
+                  </div>
+  
+              </form>
+          </div>
+          <div class="right"> 
+            <div class="sign-up-container">
+              <h1>Login and Continue your Journey</h1>
+
+              <p>Don't have an account?</p>
+              <button class="sign-up-btn">Register</button>
+              <img src="./assets/undraw_sign_up_n6im.svg">
+            </div>
+        </div>
+      </section>
+  </main>
+
+  <script src="./JS/signin.js"></script>
 </body>
 </html>

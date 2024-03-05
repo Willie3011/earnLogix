@@ -14,6 +14,7 @@
 }
 
 
+
 *{
     margin: 0;
     padding: 0;
@@ -30,6 +31,7 @@ body{
 
 header{
     position: sticky;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -103,21 +105,67 @@ main{
 }
 
 .container .left{
-    width: 50%;
+    width: 35%;
     height: 100%;
     overflow: hidden;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .left img{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
+
+.sign-in-container{
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sign-in-container h1{
+    margin-left: 1rem;
+    font-size: 2rem;
+    color: var(--honeydew);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.sign-in-container p{
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--Muted-gray);
+    margin-bottom: 1rem;
+}
+
+.sign-in-btn{
+    width: 65%;
+    padding: 10px 25px;
+    background: transparent;
+    border: none;
+    color: var(--White-text);
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--Crimson-Red);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.sign-in-btn:hover{
+    background: var(--Crimson-Red);
+    color: var(--White-text);
+}
+
 
 .right{
 
-    width: 50%;
+    width: 70%;
 }
 
 .right form{
@@ -170,7 +218,7 @@ form .input-group button{
     margin-bottom: 1.5rem;
     border-radius: 0.25rem;
     color: #fff;
-    font-size: 14px;
+    font-size: 1rem;
     letter-spacing: 1.1px;
     font-weight: 600;
     cursor: pointer;
@@ -225,12 +273,11 @@ form .input-group button:hover{
         header nav.active{
             display: block;
             position: absolute;
-            top: 85px;
-            right: 30px;
-            min-width: 50%;
+            top: 65px;
+            min-width: 100%;
             height: auto;
             background: var(--honeydew);
-        
+            left: 0;
             flex-direction: column;
             padding: 1rem;
         }
@@ -255,6 +302,13 @@ form .input-group button:hover{
             border: none;
             background: transparent;
             font-size: 3rem;
+            display: flex;
+            align-items: center;
+        }
+    
+        .toggle svg{
+            width: 2rem;
+            height: 2rem;
         }
 
         body{
@@ -266,7 +320,7 @@ form .input-group button:hover{
     
     @media screen and (max-width: 800px) {
         .container{
-            flex-direction: column;
+            flex-direction: column-reverse;
             width: 700px;
         }
 
@@ -287,9 +341,6 @@ form .input-group button:hover{
             width: auto;
         }
 
-        .container .left{
-            display: none;
-        }
 
         form .input-group input{
             height: 50px;

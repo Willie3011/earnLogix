@@ -28,6 +28,7 @@ body{
 
 header{
     position: sticky;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -83,6 +84,158 @@ header nav ul li a{
     display: none;
 }
 
+
+main{
+    padding: 1rem;
+}
+
+
+.container{
+    width: 800px;
+    height: 500px;
+    background-color: var(--cerulean);
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    border-radius: 0.35rem;
+    overflow: hidden;
+    box-shadow: 0 0 8px 4px rgba(0,0,0, 0.1);
+}
+
+.container .right{
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.right img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-bottom: 2rem;
+    align-self: center;
+}
+
+.sign-up-container{
+    margin-top: 2rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sign-up-container h1{
+    margin-left: 1rem;
+    font-size: 2rem;
+    color: var(--honeydew);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.sign-up-container p{
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--Muted-gray);
+    margin-bottom: 1rem;
+}
+
+.sign-up-btn{
+    width: 65%;
+    padding: 10px 25px;
+    background: transparent;
+    border: none;
+    color: var(--White-text);
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--Crimson-Red);
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: background 0.3s ease;
+}
+
+.sign-up-btn:hover{
+    background: var(--Crimson-Red);
+    color: var(--White-text);
+}
+
+
+.left{
+    width: 60%;
+    height: 100%;
+}
+
+.left form{
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.left h1,
+.left p{
+    text-align: center;
+}
+
+.left h1{
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.left p{
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+form .input-group{
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+form .input-group label{
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;    
+} 
+
+form .input-group input{
+    width: 100%;
+    height: 50px;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+
+form .input-group button{
+    
+    width: 40%;
+    height: 45px;
+    background-color: var(--Crimson-Red);
+    border: none;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 1.1px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form .input-group button:hover{
+    background-color: var(--red-pantone);
+}
+
 @media screen and (width < 991px) {
     header nav{
         display: none;
@@ -91,11 +244,11 @@ header nav ul li a{
         header nav.active{
             display: block;
             position: absolute;
-            top: 85px;
+            top: 65px;
             right: 30px;
             min-width: 50%;
             height: auto;
-            background: var(--honeydew);
+            background: #f9f9f9;
         
             flex-direction: column;
             padding: 1rem;
@@ -121,5 +274,54 @@ header nav ul li a{
             border: none;
             background: transparent;
             font-size: 3rem;
+            display: flex;
+            align-items: center;
         }
+    
+        .toggle svg{
+            width: 2rem;
+            height: 2rem;
+        }
+
+        body{
+            font-size: 97.5%;
+        }
+
     }    
+    
+    
+@media screen and (max-width: 800px) {
+        header nav.active{
+            width: 100%;
+            left: 0;
+            right: unset;
+        }
+
+        .container{
+            flex-direction: column;
+            width: 700px;
+            height: auto;
+        }
+
+        .container .left{
+            width: 100%;
+            height: 30%;
+        }
+
+        .container .right{
+            width: 100%;
+            height: 50%;
+        }
+
+    }
+
+@media screen and (max-width: 768px) {
+        .container{
+            width: auto;
+        }
+
+
+        form .input-group input{
+            height: 50px;
+        }
+    }

@@ -597,11 +597,10 @@ header nav{
         display: block;
         position: absolute;
         top: 65px;
-        right: 30px;
-        min-width: 50%;
+        right: 45px;
+        width: 50%;
         height: auto;
         background: var(--honeydew);
-    
         flex-direction: column;
         padding: 1rem;
     }
@@ -645,8 +644,8 @@ header nav{
     }
 
     .toggle svg{
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     section,
@@ -734,7 +733,9 @@ header nav{
 
 @media screen and (width <= 768px) {
     header nav.active{
-        width: 50%;
+        width: 100%;
+        right: unset;
+        left: 0;
     }
 
     .services .container .service h4{
@@ -759,7 +760,7 @@ header nav{
 @media screen and (max-width: 600px){
 
     header nav.active{
-        width: 90%;
+        width: 100%;
         right: 10px;
         margin: 0 auto;
     }
