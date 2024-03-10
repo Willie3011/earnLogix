@@ -1,0 +1,45 @@
+:root{
+    --Berkeley-blue: #1d3557;
+    --cerulean: #457b9dff;
+    --Electric-Blue: #0074cc;
+    --non-photo-blue: #a8dadcff;
+    --honeydew: #f1faeeff;
+    --charcoal-gray: #aaaaaa;
+    --Gold: #ff9a17;
+    --red-pantone: rgb(255, 107, 119);
+    --Crimson-Red: #e63946;
+    --White-text: #fff;
+    --Dark-text: #000011;
+    --Muted-gray: #afafaf;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 300px 3fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+        "sidebar header"
+        "sidebar main"
+        "sidebar main"
+    ;
+}
+
+header{
+    background: var(--Dark-text);
+    color: var(--White-text);
+    grid-area: header;
+    height: 60px;
+}
+
+main{
+    background-color: var(--Electric-Blue);
+    grid-area: main;
+    height: calc(100vh - 60px);
+
+}
+
+.sidebar{
+    background: var(--Berkeley-blue);
+    grid-area: sidebar;
+    height: 100vh;
+}
