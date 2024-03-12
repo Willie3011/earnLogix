@@ -337,9 +337,4 @@ form .input-group button{
         .container{
             width: auto;
         }
-
-
-        form .input-group input{
-            height: 50px;
-        }
     }
