@@ -13,7 +13,18 @@
     --Muted-gray: #afafaf;
 }
 
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+}
+
 body{
+    font-family: sans-serif;
     display: grid;
     grid-template-columns: 300px 3fr;
     grid-template-rows: 1fr;
@@ -25,10 +36,88 @@ body{
 }
 
 header{
-    background: var(--Dark-text);
-    color: var(--White-text);
     grid-area: header;
     height: 60px;
+    padding: 10px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul{
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li{
+    padding: 10px 14px;
+    width: max-content;
+    border-radius: 8px;
+}
+
+nav ul li:hover{
+    background: var(--Crimson-Red);
+}
+
+nav ul li:hover a{
+    color: var(--honeydew);
+}
+
+nav ul li a{
+    color: var(--Dark-text);
+    font-size: 1rem;
+}
+
+.dropdown{
+    float: left;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.dropbtn{
+    background-color: transparent;
+    border: none;
+}
+
+.dropdownContent{
+    top: -100%;
+    right: 0;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.dropdownContent.active{
+    position: absolute;
+    display: block;
+    width: 200px;
+    height: auto;
+    top: 60px;
+    right: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: var(--honeydew);
+    z-index: 1;
+}
+
+.dropdownContent a{
+    color: var(--Dark-text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.dropdownContent a:hover{
+    transform: scale(0.98);
+    color: var(--Crimson-Red);
+}
+
+.profile-pic{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 main{

@@ -4,11 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EarnLogix | Welcome to EarnLogix Dashboard</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png">
     <link rel="stylesheet" href="./CSS/dashboard.css">
 </head>
 <body>
     <header>
-        Header
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="./about.html">About</a>
+                </li>
+                <li>
+                    <a href="./faq.html">FAQ</a>
+                </li>
+            </ul>
+        </nav>
+            <div class="dropdown">
+                <button onclick="toggleDropdown()" class="dropbtn">
+                    <img src="./assets/pexels-adrienn-1542085.jpg" alt="profile-picture" class="profile-pic">
+                </button>
+                <div class="dropdownContent">
+                    <a href="./profile.html">Profile</a>
+                    <a href="./settings.html">Settings</a>
+                    <a href="./help.html">Help & Support</a>
+                    <a href="#logout">Logout</a>
+                </div>
+            </div>
     </header>
     <section class="sidebar">
         Sidebar
@@ -16,5 +40,7 @@
     <main>
         main
     </main>
+
+    <script src="./JS/dashboard.js"></script>
 </body>
 </html>

@@ -96,7 +96,7 @@ main{
     width: 800px;
     height: auto;
     background-color: var(--cerulean);
-    margin: 50px auto;
+    margin: 10px auto;
     display: flex;
     align-items: center;
     border-radius: 0.35rem;
@@ -104,8 +104,28 @@ main{
     box-shadow: 0 0 8px 4px rgba(0,0,0, 0.1);
 }
 
+.container button
+{
+    
+    width: 40%;
+    height: 40px;
+    background-color: var(--Crimson-Red);
+    border: none;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.container button:hover{
+    background-color: var(--charcoal-gray);
+}
+
 .container .left{
-    width: 35%;
+    width: 40%;
     height: 100%;
     overflow: hidden;
     padding: 1rem;
@@ -122,14 +142,14 @@ main{
 }
 
 .sign-in-container{
-    margin-top: 6rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
 .sign-in-container h1{
+    text-align: center;
     margin-left: 1rem;
     font-size: 2rem;
     color: var(--honeydew);
@@ -144,28 +164,14 @@ main{
     margin-bottom: 1rem;
 }
 
-.sign-in-btn{
+.container .sign-in-btn{
     width: 65%;
-    padding: 10px 25px;
-    background: transparent;
-    border: none;
-    color: var(--White-text);
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--Crimson-Red);
-    cursor: pointer;
-    transition: background 0.3s ease;
+    background: var(--Berkeley-blue);
 }
-
-.sign-in-btn:hover{
-    background: var(--Crimson-Red);
-    color: var(--White-text);
-}
-
 
 .right{
 
-    width: 70%;
+    width: 60%;
 }
 
 .right form{
@@ -200,51 +206,35 @@ form .input-group label{
 
 form .input-group input{
     width: 100%;
-    height: 50px;
+    height: 35px;
     padding: 0.5rem;
     border-radius: 0.25rem;
     outline: none;
     border: 1px solid #ccc;
 }
 
-
 form .input-group button{
-    
-    width: 40%;
-    height: 45px;
-    background-color: var(--Crimson-Red);
-    border: none;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-    border-radius: 0.25rem;
-    color: #fff;
-    font-size: 1rem;
-    letter-spacing: 1.1px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-form .input-group button:hover{
-    background-color: var(--red-pantone);
+    margin: 0.45rem 0;
+    width: 100%;
 }
 
 .social-register {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .social-register .socials ul{
-    margin-top: 1rem;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     align-items: center;
     justify-content: space-evenly;
 }
 
 .socials ul li{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 100%;
+    height: 35px;
     border: 1px solid #ccc;
+    border-radius: 0.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -254,7 +244,14 @@ form .input-group button:hover{
 
 .socials ul li a{
     color: var(--Dark-text);
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.socials ul li a i{
     font-size: 1.5rem;
+    margin-right: 1rem;
 }
 
 .socials ul li:hover{

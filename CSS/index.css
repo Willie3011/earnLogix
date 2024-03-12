@@ -100,14 +100,14 @@ header nav ul li a{
     color: var(--White-text);
     background-color: var(--Crimson-Red);
     border-radius: 0.25rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 600;
     transition: background 400ms ease;
     
 }
 
 .register-buttons .register-btn:hover{
-    background-color: var(--red-pantone);
+    background-color: var(--charcoal-gray);
 }
 
 .header-buttons button{
@@ -181,10 +181,9 @@ section:nth-child(even){
 
 .hero-content p{
     color: var(--charcoal-gray);
-    font-size: 1.2rem;
-    padding-right : 5.5rem;
-    letter-spacing: 0.975px;
-    line-height: 1.2;
+    font-size: 1.1rem;
+    max-width: 50ch;
+    line-height: 1.5;
 }
 
 .cta-btn{
@@ -201,7 +200,7 @@ section:nth-child(even){
 }
 
 .cta-btn:hover{
-    background-color: var(--red-pantone);
+    background-color: var(--charcoal-gray);
 }
 
 
@@ -212,15 +211,11 @@ section:nth-child(even){
     margin-top: 3rem;
 }
 
-.about .container .left{
-    margin-top: 5rem;
-}
-
 .container .left p{
-    color: var(--Dark-text);
-    letter-spacing: 0.65px;
-    font-size: 1.2rem;
-    padding-right: 6rem;
+    color: var(--Berkeley-blue);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 40ch;
     margin-bottom: 3rem;
 }
 
@@ -339,7 +334,7 @@ section:nth-child(even){
     position: relative;
     width: 100%;
     letter-spacing: 1.2px;
-    font-size: 22px;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--Crimson-Red);
 }
@@ -428,7 +423,7 @@ section:nth-child(even){
 }
 
 .testimony .content p{
-    color: var(--Dark-text);
+    color: var(--Berkeley-blue);
     opacity: 0.8;
     font-size: 14px;
     line-height: normal;
@@ -493,8 +488,17 @@ footer ul li{
     margin-bottom: 10px;
 }
 
-footer ul li a{
+.footer-navigation ul li a,
+.company ul li a{
+    display: block;
     color: var(--honeydew);
+    transition: all 0.3s ease-in-out;
+}
+
+.footer-navigation ul li a:hover,
+.company ul li a:hover{
+    transform: translateX(5px);
+    color: var(--Crimson-Red);
 }
 
 .footer-contact p{
@@ -509,36 +513,29 @@ footer ul li a{
     color: var(--Crimson-Red);
 }
 
-.footer-socials{
+.socials{
+    margin-top: 10px;
+}
+
+.socials h3{
+    font-size: 1rem;
+}
+
+.socials ul{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 20px;
 }
 
-.footer-socials ul{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
 
-.footer-socials ul li{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--charcoal-gray);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color .3s ease;
-}
-
-.footer-socials ul li:hover{
-    background-color: var(--Crimson-Red);
-}
-
-.footer-socials ul li a i{
+.socials ul li a i{
     color: var(--White-text);
     font-size: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.socials ul li a:hover i{
+    color: var(--Crimson-Red);
+    transform: translateY(-3px);
 }
 
 .footer-subscribe form{
@@ -672,12 +669,14 @@ header nav{
     }
 
     .cta-btn {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .hero-content p{
         padding-right: unset;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        letter-spacing: normal;
+        line-height: 1.5;
     }
 
     .about .container .left {
@@ -746,14 +745,8 @@ header nav{
         font-size: 1.1rem;
     }
 
-    .testimony .wrapper{
-        flex-direction: row;
-        padding: 30px 100px;
-    }
-
-    .testimony .thumbnail{
-        width: 200px;
-        height: 200px;
+    .faq-title{
+        font-size: 1rem;
     }
 }
 

@@ -94,12 +94,31 @@ main{
     width: 800px;
     height: 500px;
     background-color: var(--cerulean);
-    margin: 50px auto;
+    margin: 10px auto;
     display: flex;
     align-items: center;
     border-radius: 0.35rem;
     overflow: hidden;
     box-shadow: 0 0 8px 4px rgba(0,0,0, 0.1);
+}
+
+.container button
+{   
+    width: 40%;
+    height: 40px;
+    background-color: var(--Crimson-Red);
+    border: none;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.container button:hover{
+    background-color: var(--charcoal-gray);
 }
 
 .container .right{
@@ -122,7 +141,7 @@ main{
 }
 
 .sign-up-container{
-    margin-top: 2rem;
+    margin-bottom: 2rem;
     display: flex;
     text-align: center;
     align-items: center;
@@ -144,23 +163,9 @@ main{
     margin-bottom: 1rem;
 }
 
-.sign-up-btn{
+.container .sign-up-btn{
     width: 65%;
-    padding: 10px 25px;
-    background: transparent;
-    border: none;
-    color: var(--White-text);
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--Crimson-Red);
-    cursor: pointer;
-    margin-bottom: 2rem;
-    transition: background 0.3s ease;
-}
-
-.sign-up-btn:hover{
-    background: var(--Crimson-Red);
-    color: var(--White-text);
+    background: var(--Berkeley-blue);
 }
 
 
@@ -207,7 +212,7 @@ form .input-group label{
 
 form .input-group input{
     width: 100%;
-    height: 50px;
+    height: 35px;
     padding: 0.5rem;
     border-radius: 0.25rem;
     outline: none;
@@ -216,24 +221,53 @@ form .input-group input{
 
 
 form .input-group button{
-    
-    width: 40%;
-    height: 45px;
-    background-color: var(--Crimson-Red);
-    border: none;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin: 0.45rem 0;
+    width: 100%;
+}
+
+.social-register {
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.social-register .socials ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.socials ul li{
+    width: 100%;
+    height: 35px;
+    border: 1px solid #ccc;
     border-radius: 0.25rem;
-    color: #fff;
-    font-size: 1rem;
-    letter-spacing: 1.1px;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-form .input-group button:hover{
-    background-color: var(--red-pantone);
+.socials ul li a{
+    color: var(--Dark-text);
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.socials ul li a i{
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.socials ul li:hover{
+    background-color: var(--Muted-gray);
+}
+
+.socials ul li:hover a{
+    color: var(--honeydew);
 }
 
 @media screen and (width < 991px) {
@@ -318,10 +352,5 @@ form .input-group button:hover{
 @media screen and (max-width: 768px) {
         .container{
             width: auto;
-        }
-
-
-        form .input-group input{
-            height: 50px;
         }
     }
