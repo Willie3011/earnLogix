@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root{
     --Berkeley-blue: #1d3557;
     --cerulean: #457b9dff;
@@ -28,7 +30,7 @@ html{
 }
 
 body{
-    font-family: sans-serif;
+    font-family: 'Open Sans' ,sans-serif;
     width: auto;
     max-width: 1440px;
     display: flex;
@@ -684,9 +686,9 @@ header nav{
 
     .container .left p{
         padding: unset;
+        max-width: unset;
         letter-spacing: normal;
         line-height: 1.5;
-        font-size: 1.2rem;
     }
 
     footer > div{
@@ -747,6 +749,7 @@ header nav{
     .faq-title{
         font-size: 1rem;
     }
+
 }
 
 @media screen and (max-width: 600px){
