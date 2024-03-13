@@ -1,104 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EarnLogix - Register an Account</title>
     <!--    Logo    -->
-    <link rel="icon" type="image/png" href="./assets/logo.png">
-    
+    <link rel="icon" type="image/png" href="./assets/logo.png" />
+
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet" />
-    
-    <link rel="stylesheet" href="./CSS/register.css">
-</head>
-<body>
+
+    <link rel="stylesheet" href="./CSS/register.css" />
+  </head>
+  <body>
     <header>
-        <h4 class="logo">Earn<span>Logix</span></h4>
-        <div class="header-buttons">
-          <button class="toggle"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg></button>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <a href="index.html">Home</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#faq">FAQ</a>
-            </li>
-          </ul>
-        </nav>
+      <h4 class="logo">Earn<span>Logix</span></h4>
+      <div class="header-buttons">
+        <button class="toggle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24">
+            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
+          </svg>
+        </button>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#faq">FAQ</a>
+          </li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <section class="container">
-            <div class="left">
-              <div class="sign-in-container">
-                <h1>Sign up and Explore More!</h1>
-                
-                <p>Already have an account?</p>
-                <button class="sign-in-btn">Sign In</button>
+      <section class="container">
+        <div class="left">
+          <div class="sign-in-container">
+            <h1>Sign up and Explore More!</h1>
+
+            <p>Already have an account?</p>
+            <button class="sign-in-btn">Sign In</button>
+          </div>
+
+          <img src="./assets/undraw_sign_up_n6im.svg" />
+        </div>
+        <div class="right">
+          <form>
+            <h1>Register</h1>
+            <p>Register an account</p>
+            <div class="input-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                />
+              <p id="name-error"></p>
+            </div>
+            <div class="input-group">
+              <label for="surname">Surname</label>
+              <input
+                type="text"
+                id="surname"
+                placeholder="Enter your Surname"
+                />
+              <p id="surname-error"></p>
+            </div>
+
+            <div class="input-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                 />
+              <p id="email-error"></p>
+            </div>
+
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                 />
+              <p>Must be at least 8 characters</p>
+              <p id="password-error"></p>
+            </div>
+
+            <div class="input-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm your password"
+                 />
+                <p id="confirm-password-error"></p>
+            </div>
+
+            <div class="input-group">
+              <button>Register</button>
+            </div>
+
+            <div class="social-register">
+              <p>Or Register with your socials</p>
+              <div class="socials">
+                <ul>
+                  <li>
+                    <a href="#"> <i class="bx bxl-google-plus"></i> Google </a>
+                  </li>
+                  <li>
+                    <a href="#"> <i class="bx bxl-facebook"></i> Facebook </a>
+                  </li>
+                </ul>
               </div>
-              
-              <img src="./assets/undraw_sign_up_n6im.svg">
             </div>
-            <div class="right">
-                <form>
-                    <h1>Register</h1>
-                    <p>Register an account</p>
-                    <div class="input-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" placeholder="Enter your name" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="surname">Surname</label>
-                        <input type="text" id="surname" placeholder="Enter your Surname" required>
-                    </div>
-    
-                    <div class="input-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="Enter your email" required>
-                    </div>
-    
-                    <div class="input-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Enter your password" required>
-                    </div>
-    
-                    <div class="input-group">
-                        <label for="confirm-password">Confirm Password</label>
-                        <input type="password" id="confirm-password" placeholder="Confirm your password" required>
-                    </div>
-    
-                    <div class="input-group">
-                        <button onclick="validateInput()">Register</button>
-                    </div>
-    
-                    <div class="social-register">
-                        <p>Or Register with your socials</p>
-                        <div class="socials">
-                            <ul>
-                              <li>
-                                <a href="#">
-                                  <i class="bx bxl-google-plus"></i> Google
-                                </a>
-                              </li>
-                                <li>
-                                  <a href="#">
-                                    <i class="bx bxl-facebook"></i> Facebook
-                                  </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
+          </form>
+        </div>
+      </section>
     </main>
 
     <script src="./JS/register.js"></script>
-</body>
+  </body>
 </html>

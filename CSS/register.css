@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root{
     --Berkeley-blue: #1d3557;
     --cerulean: #457b9dff;
@@ -21,10 +23,10 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body{
-    font-family: sans-serif;
     width: 100%;
     overflow-x: hidden;
 }
@@ -196,12 +198,13 @@ main{
 }
 
 form .input-group{
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 form .input-group label{
+    display: block;
     font-size: 0.9rem;
-    margin-bottom: 0.5rem;    
+    margin-bottom: 5px;    
 } 
 
 form .input-group input{
@@ -213,9 +216,28 @@ form .input-group input{
     border: 1px solid #ccc;
 }
 
+form .input-group input.error{
+    border: 1px solid var(--red-pantone);
+}
+
+form .input-group p{
+    text-align: left;
+    font-size: 0.7rem;
+    color: var(--charcoal-gray);
+    margin: 0;;
+}
+
 form .input-group button{
     margin: 0.45rem 0;
     width: 100%;
+}
+
+#name-error,
+#surname-error,
+#email-error,
+#password-error,
+#confirm-password-error{
+    color: var(--red-pantone);
 }
 
 .social-register {
