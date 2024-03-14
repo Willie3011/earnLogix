@@ -53,7 +53,38 @@ function validateInputs(){
         passwordError.textContent = "";
         passwordEl.classList.remove("error");
         person.password = password;
-        console.log(person);
+        signIn(person);
     }
+}
 
+function signIn(person){
+    let request = window.indexedDB.open("earnLogix", 1);
+    request.onsuccess = function(event){
+        let db = event.target.result;
+
+        let transaction = db.transaction(["users"], "readonly");
+        let objectStore = transaction.objectStore("users");
+
+
+        let getRequest = objectStore.get(person.email);
+
+
+        getRequest.onsuccess = function(event){
+            let user = event.target.result;
+            console.log(user.password);
+            console.log(person);
+            if(user && user.password === person.password){
+                window.location.href = "dashboard.html"
+            }
+            else{
+                const passwordError = document.getElementById("password-error");
+                passwordError.textContent = "Email Address or Password does not match";
+            }
+        };
+
+
+        getRequest.onerror = function(event){
+            console.error("Error retrieving person from IndexDB", event.target.error);
+        }
+    }
 }
