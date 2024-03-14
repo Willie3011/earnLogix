@@ -23,6 +23,7 @@
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
+    font-family: 'Open Sans' ,sans-serif;
 }
 
 html{
@@ -30,7 +31,6 @@ html{
 }
 
 body{
-    font-family: 'Open Sans' ,sans-serif;
     width: auto;
     max-width: 1440px;
     display: flex;
