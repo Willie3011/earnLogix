@@ -131,9 +131,40 @@ function validateInput() {
       confirmPasswordError.textContent = "";
       confirmPasswordEl.classList.remove("error");
       person.password = password;
+      saveToDatabase(person);
       window.location.href = "signin.html";
     }
   } else {
     passwordError.textContent = "Please use the correct format!";
+  }
+}
+
+function saveToDatabase(person){
+  let request = window.indexedDB.open("earnLogix", 1);
+
+
+  request.onupgradeneeded = function(event){
+    let db = event.target.result;
+    let objectStore = db.createObjectStore("users", {keyPath: "email" });
+  };
+
+  request.onsuccess = function(event){
+    let db = event.target.result;
+    let transaction = db.transaction(["users"], "readwrite");
+    let objectStore = transaction.objectStore("users");
+    let request = objectStore.add(person);
+
+    request.onsuccess = function(event) {
+      console.log("Person added to IndexDB");
+    };
+
+
+    request.onerror = function(event){
+      console.error("Unable to add person to IndexDB");
+    };
+  };
+
+  request.onerror = function (event){
+    console.error("Error opening IndexDB database")
   }
 }
