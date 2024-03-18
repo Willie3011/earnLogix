@@ -1,46 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EarnLogix | Welcome to EarnLogix Dashboard</title>
-    <link rel="icon" type="image/png" href="./assets/logo.png">
-    <link rel="stylesheet" href="./CSS/dashboard.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="./about.html">About</a>
-                </li>
-                <li>
-                    <a href="./faq.html">FAQ</a>
-                </li>
-            </ul>
-        </nav>
-            <div class="dropdown">
-                <button onclick="toggleDropdown()" class="dropbtn">
-                    <img src="./assets/pexels-adrienn-1542085.jpg" alt="profile-picture" class="profile-pic">
-                </button>
-                <div class="dropdownContent">
-                    <a href="./profile.html">Profile</a>
-                    <a href="./settings.html">Settings</a>
-                    <a href="./help.html">Help & Support</a>
-                    <a href="#logout">Logout</a>
-                </div>
-            </div>
-    </header>
+    <link rel="icon" type="image/png" href="./assets/logo.png" />
+    <link rel="stylesheet" href="./CSS/dashboard.css" />
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet" />
+  </head>
+  <body>
     <section class="sidebar">
-        Sidebar
+      <div class="logo-content">
+        <div class="logo">
+          <div class="logo-name">
+            earn<span>Logix</span>
+          </div>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul>
+        <li>
+          <a href="#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="link-name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-line-chart"></i>
+            <span class="link-name">Income Tracking</span>
+          </a>
+          <span class="tooltip">Income Tracking</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="link-name">Expense Management</span>
+          </a>
+          <span class="tooltip">Expense Management</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-briefcase-alt-2"></i>
+            <span class="link-name">Financial Insights</span>
+          </a>
+          <span class="tooltip">Financial Insights</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-book-bookmark"></i>
+            <span class="link-name">Tax Compliance</span>
+          </a>
+          <span class="tooltip">Tax Compliance</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="link-name">Settings</span>
+          </a>
+          <span class="tooltip">Settings</span>
+        </li>
+      </ul>
+      <div class="profile-content">
+        <div class="profile">
+          <div class="profile-details">
+            <img src="./assets/profile-picture.png" alt="Profile Picture">
+            <div class="name-details">
+              <div class="name">Willem April</div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log-out"></i>
+        </div>
+      </div>
     </section>
     <main>
-        main
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="./about.html">About</a>
+            </li>
+            <li>
+              <a href="./faq.html">FAQ</a>
+            </li>
+          </ul>
+        </nav>
+  
+        <div class="dropdown">
+          <button onclick="toggleDropdown()" class="dropbtn">
+            <img
+              src="./assets/pexels-adrienn-1542085.jpg"
+              alt="profile-picture"
+              class="profile-pic" />
+          </button>
+          <div class="dropdownContent">
+            <a href="./profile.html">Profile</a>
+            <a href="./settings.html">Settings</a>
+            <a href="./help.html">Help & Support</a>
+            <a href="#logout">Logout</a>
+          </div>
+        </div>
+      </header>
     </main>
 
     <script src="./JS/dashboard.js"></script>
-</body>
+  </body>
 </html>
