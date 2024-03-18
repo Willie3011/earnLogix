@@ -34,10 +34,11 @@ body{
 
 main header{
     height: 60px;
-    padding: 10px 5%;
+    padding: 10px 2%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 nav ul{
@@ -136,7 +137,7 @@ main{
     top: 0;
     left: 0;
     padding: 6px 14px;
-    height: 100vh;
+    height: 100%;
     transition: 0.5s ease;
 }
 
@@ -194,8 +195,6 @@ main{
     position: relative;
     height: 50px;
     width: 100%;
-    margin: 0 5px;
-    line-height: 50px;
 }
 
 .sidebar ul li .tooltip{
@@ -205,10 +204,9 @@ main{
     transform: translate(-50%, -50%);
     border-radius: 6px;
     padding: 5px;
-    width: 122px;
     max-width: max-content;
     background: var(--White-text);
-    line-height: 35px;
+    
     height: max-content;
     text-align: center;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
@@ -234,7 +232,6 @@ main{
     align-items: center;
     transition: all 0.3s ease;
     border-radius: 12px;
-    white-space: nowrap;
 }
 .sidebar ul li a:hover{
     color: var(--Berkeley-blue);
