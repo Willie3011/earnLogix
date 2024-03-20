@@ -23,12 +23,12 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family: 'Open Sans', sans-serif;
 }
 
 body{
     width: 100%;
     overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif;
 }
 
 header{
@@ -320,14 +320,13 @@ form .input-group button{
             display: block;
             border: none;
             background: transparent;
-            font-size: 3rem;
             display: flex;
             align-items: center;
         }
     
         .toggle svg{
-            width: 2rem;
-            height: 2rem;
+            width: 24px;
+            height: 24px;
         }
 
         body{
