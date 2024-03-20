@@ -186,7 +186,7 @@ main{
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
 }
 
@@ -230,8 +230,22 @@ form .input-group input.error{
 
 
 form .input-group button{
-    margin: 0.45rem 0;
+    margin: 0.25rem 0;
     width: 100%;
+}
+
+.left form .forgot .forgot-pass{
+    text-align: left;
+    color: var(--Muted-gray);
+}
+
+.forgot-pass a{
+    color: var(--Electric-Blue);
+}
+
+.forgot-pass a:focus,
+.forgot-pass a:hover{
+    text-decoration: underline;
 }
 
 #email-error,
