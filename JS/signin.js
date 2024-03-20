@@ -77,6 +77,11 @@ function signIn(person){
 
             sessionStorage.setItem("username", fullName);
             if(user && user.password === person.password){
+                //set authentication to true
+                sessionStorage.setItem("authenticated", "true");
+                
+                //set login time
+                sessionStorage.setItem("loginTime", Date.now());
                 window.location.href = "dashboard.html"
             }
             else{
