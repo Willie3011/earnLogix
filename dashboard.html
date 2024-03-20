@@ -70,7 +70,7 @@
           <div class="profile-details">
             <img src="./assets/profile-picture.png" alt="Profile Picture">
             <div class="name-details">
-              <div class="name">Willem April</div>
+              <div class="name" id="username">Willem April</div>
             </div>
           </div>
           <i class="bx bx-log-out" id="log-out"></i>
@@ -102,6 +102,81 @@
           </div>
         </div>
       </header>
+
+      <!-- Dashboard Overview Section -->
+      <section class="overview" id="overview">
+        <div class="card-container">
+          <div class="card">
+            <i class="bx bx-chart"></i>
+            <div class="middle">
+              <div class="left">
+                <h3>Expected Salary</h3>
+                <h1 id="salary"> R2 786.32</h1>
+              </div>
+              <div class="progress">
+                <svg>
+                  <circle cx="80" cy="70" r="40"></circle>
+                  <circle class="circle-progress p1" cx="80" cy="70" r="40"></circle>
+                </svg>
+              </div>
+            </div>
+            <small class="text-muted">Last Updated 24 Hours</small>
+          </div>
+          <div class="card">
+            <i class="bx bx-line-chart"></i>
+            <div class="middle">
+              <div class="left">
+                <h3>Days Worked</h3>
+                <h1 id="salary">26 <span>Days</span></h1>
+              </div>
+              <div class="progress">
+                <svg>
+                  <circle cx="80" cy="70" r="40"></circle>
+                  <circle class="circle-progress p2" cx="80" cy="70" r="40"></circle>
+                </svg>
+              </div>
+            </div>
+            <small class="text-muted">Last Updated 24 Hours</small>
+          </div>
+          <div class="card">
+            <i class="bx bx-bar-chart"></i>
+            <div class="middle">
+              <div class="left">
+                <h3>Days Off</h3>
+                <h1 id="salary">9 <span>Days</span></h1>
+              </div>
+              <div class="progress">
+                <svg>
+                  <circle cx="80" cy="70" r="40"></circle>
+                  <circle class="circle-progress p3" cx="80" cy="70" r="40"></circle>
+                </svg>
+              </div>
+            </div>
+            <small class="text-muted">Last Updated 24 Hours</small>
+          </div>
+          <div class="card">
+            <i class="bx bx-x"></i>
+            <div class="middle">
+              <div class="left">
+                <h3>Hours Worked</h3>
+                <h1 id="salary">120 <span>Hours</span></h1>
+              </div>
+              <div class="progress">
+                <svg>
+                  <circle cx="80" cy="70" r="40"></circle>
+                  <circle class="circle-progress p4" cx="80" cy="70" r="40"></circle>
+                </svg>
+              </div>
+            </div>
+            <small class="text-muted">Last Updated 24 Hours</small>
+          </div>
+        </div>
+        
+        <!-- Hours history table -->
+        <div class="dataTable"></div>
+      </section>
+
+      <!-- End of Dashboard Overview -->
     </main>
 
     <script src="./JS/dashboard.js"></script>
