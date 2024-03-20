@@ -21,11 +21,11 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    font-family:'Open Sans', sans-serif;
-
+    
 }
 
 body{
+    font-family:'Open Sans', sans-serif;
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
@@ -330,8 +330,8 @@ form .input-group button{
         }
     
         .toggle svg{
-            width: 2rem;
-            height: 2rem;
+            width: 24px;
+            height: 24px;
         }
 
         body{
