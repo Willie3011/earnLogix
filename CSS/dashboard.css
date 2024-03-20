@@ -7,12 +7,13 @@
     --non-photo-blue: #a8dadcff;
     --honeydew: #f1faeeff;
     --charcoal-gray: #aaaaaa;
-    --Gold: #ff9a17;
     --red-pantone: rgb(255, 107, 119);
     --Crimson-Red: #e63946;
     --White-text: #fff;
     --Dark-text: #000011;
     --Muted-gray: #afafaf;
+
+    --accent-color-1: hsla(215, 85%, 61%, 0.788) ;
 }
 
 *, *::before, *::after{
@@ -44,7 +45,8 @@ main header{
 header .logo-content{
     display: flex;
     align-items: center;
-    display: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 header #header-toggle-btn{
@@ -57,7 +59,7 @@ header #header-toggle-btn{
 }
 
 .dropdown{
-    float: left;
+    float: right;
     overflow: hidden;
     transition: all 0.3s ease;
 }
@@ -314,10 +316,134 @@ main{
     background-color: none;
 }
 
+/* card section  */
+main section{
+    height: 100vh;
+    padding: 1rem;
+}
+
+
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card{
+    width: 100%;
+    height: 250px;
+    align-items: center;
+    padding: 0.5rem;
+    color: var(--Berkeley-blue);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.card i{
+    margin: 0px auto;
+    background: var(--Berkeley-blue);
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: var(--White-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card:nth-child(2) i{
+    background: var(--Crimson-Red);
+}
+
+.card:nth-child(3) i{
+    background-color: var(--cerulean);
+}
+
+.card:nth-child(4) i{
+    background-color: var(--red-pantone);
+}
+
+
+.card .middle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #0074cc; */
+    height: 150px;
+}
+
+.card .middle .left{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #1d3557; */
+}
+
+.card .left h3{
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--Muted-gray);
+}
+
+.card .left h1{
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--Dark-text);
+}
+
+.card .left h1 span{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--charcoal-gray);
+}
+
+
+.card .middle .progress{
+    width: 50%;
+}
+
+.progress svg{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress circle{
+    cx: 70;
+    fill: none;
+    stroke: var(--charcoal-gray);
+    stroke-width: 10;
+}
+
+.progress .circle-progress{
+    fill: none;
+    stroke: var(--Berkeley-blue);
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s;
+}
+
+.card small{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 12px;
+    color: var(--Muted-gray);
+}
+
 
 @media screen and (max-width: 768px){
     header .logo-content{
-        display: flex;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .sidebar{

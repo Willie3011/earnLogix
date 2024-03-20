@@ -71,8 +71,11 @@ function signIn(person){
 
         getRequest.onsuccess = function(event){
             let user = event.target.result;
-            console.log(user.password);
-            console.log(person);
+            let name = user.name,
+            surname = user.surname,
+            fullName = `${name} ${surname}`;
+
+            sessionStorage.setItem("username", fullName);
             if(user && user.password === person.password){
                 window.location.href = "dashboard.html"
             }
