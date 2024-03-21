@@ -441,6 +441,57 @@ main section{
     color: var(--Muted-gray);
 }
 
+/* Table Section  */
+
+.dataTable .head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.dataTable .head h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.head .addBtn{
+    color: #999;
+    text-decoration: underline;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.addBtn:hover{
+    color: var(--Crimson-Red);
+}
+
+
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #9995;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th{
+    background-color: rgba(29, 53, 87, 0.2);
+}
+
+th, td{
+    padding: 10px;
+    text-align: left;
+}
+
+tr:nth-child(even){
+    background-color: rgba(141, 188, 255, 0.2);
+}
+
 @media  screen and (min-width: 1440px) {
     .progress circle{
         margin: 0 auto;
