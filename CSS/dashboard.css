@@ -322,6 +322,10 @@ main section{
     padding: 1rem;
 }
 
+.overview{
+    height: auto;
+}
+
 
 .card-container{
     display: grid;
@@ -331,7 +335,7 @@ main section{
 
 .card{
     width: 100%;
-    height: 250px;
+    height: auto;
     align-items: center;
     padding: 0.5rem;
     color: var(--Berkeley-blue);
@@ -372,8 +376,6 @@ main section{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: #0074cc; */
-    height: 150px;
 }
 
 .card .middle .left{
@@ -439,6 +441,13 @@ main section{
     color: var(--Muted-gray);
 }
 
+@media  screen and (min-width: 1440px) {
+    .progress circle{
+        margin: 0 auto;
+        cx: 100;
+    }
+}
+
 
 @media screen and (max-width: 768px){
     header .logo-content{
@@ -465,3 +474,16 @@ main section{
         z-index: -1;
     }
 }
+
+@media  screen and (max-width: 550px) {
+    .progress circle{
+        cx: 90;
+    }
+}
+
+@media  screen and (max-width: 320px) {
+    .progress circle{
+        cx: 70;
+    }
+}
+
