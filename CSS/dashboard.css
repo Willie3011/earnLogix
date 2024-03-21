@@ -190,34 +190,6 @@ main{
     width: 100%;
 }
 
-.sidebar ul li .tooltip{
-    position: absolute;
-    left: 122px;
-    top: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 6px;
-    padding: 5px;
-    max-width: max-content;
-    background: var(--White-text);
-    height: max-content;
-    text-align: center;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    transition: 0s;
-    opacity: 0;
-    pointer-events: none;
-    display: block;
-}
-
-.sidebar.active ul li .tooltip{
-    display: none;
-}
-
-.sidebar ul li:hover .tooltip{
-    transition: all 0.3s ease;
-    top: 50%;
-    opacity: 1;
-}
-
 .sidebar ul li a{
     color: var(--White-text);
     display: flex;
@@ -489,7 +461,7 @@ th, td{
 }
 
 tr:nth-child(even){
-    background-color: rgba(141, 188, 255, 0.2);
+    background-color: rgba(141, 188, 255, 0.05);
 }
 
 @media  screen and (min-width: 1440px) {

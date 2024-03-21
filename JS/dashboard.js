@@ -33,9 +33,15 @@ function toggleDropdown(){
 //sidebar toggling
 let btn = document.querySelector("#btn");
 let sidebar = document.querySelector(".sidebar");
+let listItems = sidebar.querySelectorAll("ul li");
+
+listItems.forEach(listItem => {
+    listItem.addEventListener("click", () => sidebar.classList.toggle("active"))
+})
 
 btn.addEventListener("click", () => sidebar.classList.toggle("active"));
 
+//toggle button for smaller screens
 let headerBtn = document.querySelector("#header-toggle-btn");
 
 headerBtn.addEventListener("click", () => {
@@ -43,12 +49,18 @@ headerBtn.addEventListener("click", () => {
     btn.classList.add("bx-x");
 
     btn.addEventListener("click", () => btn.classList.remove("bx-x"))
-
 });
 
+
+//loogout button
 const logout = document.getElementById("log-out");
 
-logout.addEventListener("click", () => window.location.href = "signin.html");
+logout.addEventListener("click", () => {
+    sessionStorage.removeItem("authenticated");
+    sessionStorage.removeItem("loginTime");
+    window.location.href = "signin.html"
+
+});
 
 //Card progress circles
 
