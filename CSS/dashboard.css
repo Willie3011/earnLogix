@@ -464,6 +464,21 @@ tr:nth-child(even){
     background-color: rgba(141, 188, 255, 0.05);
 }
 
+.see-more, .see-less{
+    font-size: 14px;
+    text-decoration: underline;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.see-more:hover, .see-less:hover{
+    color: var(--Crimson-Red);
+}
+
+.see-less{
+    display: none;
+}
+
 @media  screen and (min-width: 1440px) {
     .progress circle{
         margin: 0 auto;
