@@ -479,6 +479,162 @@ tr:nth-child(even){
     display: none;
 }
 
+
+/* Income tracking section */
+.income-tracking
+{
+    height: auto;
+}
+
+.income-tracking .calendar-btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.calendar-btns .month-btns{
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+}
+
+.month-btns button{
+    padding: 10px 20px;
+    height: 40px;
+    width: max-content;
+    background-color: var(--Muted-gray);
+    color: var(--White-text);
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.month-btns button:hover{
+    background-color: var(--Berkeley-blue);
+}
+
+.month-btns button.active{
+    background-color: var(--Crimson-Red);
+}
+
+.month-btns button.active:hover{
+    background-color: var(--red-pantone);
+}
+
+.addBtn button{
+    height: 40px;
+    width: 40px;
+    color: var(--White-text);
+    border-radius: 50%;
+    background-color: var(--Berkeley-blue);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 24px;
+}
+
+.addBtn button:hover{
+    background-color: var(--Muted-gray);
+}
+
+.calendar .month{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px 0;
+}
+
+.month .prev,
+.month .next{
+    position: absolute;
+    font-size: 28px;
+    color: var(--Dark-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.month .prev:hover,
+.month .next:hover{
+    color: var(--Muted-gray);
+}
+
+.month .prev{
+    left: 10px;
+}
+
+.month .next{
+    right: 10px;
+}
+
+
+.month #month{
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.calendar .weekdays{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.calendar .month-days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.month-days .day{    
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    height: 110px;
+    width: 100%;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.month-days .prev-month,
+.month-days .next-month{
+    color: var(--charcoal-gray);
+    cursor:auto;
+}
+
+.month-days .day.today{
+    font-size: 20px;
+    background-color: rgba(0, 116, 204, 0.1);
+}
+
+.month-days .day.active{
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.month-day:last-child .day{
+    border-right: none;
+}
+
+.day .hours{
+    font-size: 14px;
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    padding: 10px 20px;
+    width: 80%;
+    border-left: 3px solid #0074cc;
+    border-radius: 6px;
+    color: var(--honeydew);
+    background-color: rgba(0, 116, 204, 0.5);
+}
+
 @media  screen and (min-width: 1440px) {
     .progress circle{
         margin: 0 auto;
@@ -510,6 +666,10 @@ tr:nth-child(even){
         left: 0;
         width: 100%;
         z-index: -1;
+    }
+
+    .modal{
+        width: 90%;
     }
 }
 
