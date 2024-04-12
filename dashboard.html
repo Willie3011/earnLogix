@@ -29,7 +29,7 @@
           </a>
         </li>
         <li>
-          <a href="comingSoon.html">
+          <a href="#income-tracking">
             <i class="bx bx-line-chart"></i>
             <span class="link-name">Income Tracking</span>
           </a>
@@ -109,8 +109,8 @@
               </div>
               <div class="progress">
                 <svg>
-                  <circle cx="80" cy="70" r="40"></circle>
-                  <circle class="circle-progress p1" cx="80" cy="70" r="40"></circle>
+                  <circle cx="70" cy="70" r="40"></circle>
+                  <circle class="circle-progress p1" cx="70" cy="70" r="40"></circle>
                 </svg>
               </div>
             </div>
@@ -125,8 +125,8 @@
               </div>
               <div class="progress">
                 <svg>
-                  <circle cx="80" cy="70" r="40"></circle>
-                  <circle class="circle-progress p2" cx="80" cy="70" r="40"></circle>
+                  <circle cx="70" cy="70" r="40"></circle>
+                  <circle class="circle-progress p2" cx="70" cy="70" r="40"></circle>
                 </svg>
               </div>
             </div>
@@ -141,8 +141,8 @@
               </div>
               <div class="progress">
                 <svg>
-                  <circle cx="80" cy="70" r="40"></circle>
-                  <circle class="circle-progress p3" cx="80" cy="70" r="40"></circle>
+                  <circle cx="70" cy="70" r="40"></circle>
+                  <circle class="circle-progress p3" cx="70" cy="70" r="40"></circle>
                 </svg>
               </div>
             </div>
@@ -157,14 +157,15 @@
               </div>
               <div class="progress">
                 <svg>
-                  <circle cx="80" cy="70" r="40"></circle>
-                  <circle class="circle-progress p4" cx="80" cy="70" r="40"></circle>
+                  <circle cx="70" cy="70" r="40"></circle>
+                  <circle class="circle-progress p4" cx="70" cy="70" r="40"></circle>
                 </svg>
               </div>
             </div>
             <small class="text-muted">Last Updated 24 Hours</small>
           </div>
         </div>
+        
         
         <!-- Hours history table -->
         <div class="dataTable">
@@ -247,8 +248,45 @@
           </div>
         </div>
       </section>
-
       <!-- End of Dashboard Overview -->
+
+
+      <!-- Income Tracking Section Starts -->
+      <section class="income-tracking" id="income-tracking">
+        <h2>Income Tracking</h2>
+        
+        <!-- Button header -->
+        <div class="calendar-btns">
+          <div class="month-btns">
+            <button class="weekly-cal">Week</button>
+            <button class="monthly-cal active">Month</button>
+          </div>
+
+          <div class="addBtn">
+            <button class="add">+</button>
+          </div>
+        </div>
+
+        <!-- Calendar Section -->
+        <div class="calendar">
+          <div class="month">
+            <div class="prev"><i class="bx bx-chevron-left"></i></div>
+            <h4 id="month"></h4>
+            <div class="next"><i class="bx bx-chevron-right"></i></div>
+          </div>
+          <div class="weekdays">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thur</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+          </div>
+          <div class="month-days">
+          </div>
+        </div>
+      </section>
     </main>
 
     <script src="./JS/dashboard.js"></script>
