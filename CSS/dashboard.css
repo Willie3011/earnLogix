@@ -357,17 +357,17 @@ main section{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* background-color: #1d3557; */
 }
 
 .card .left h3{
-    font-size: 18px;
+    font-size: 14px;
+    text-align: left;
     font-weight: 400;
     color: var(--Muted-gray);
 }
 
 .card .left h1{
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--Dark-text);
 }
@@ -392,7 +392,6 @@ main section{
 }
 
 .progress circle{
-    cx: 70;
     fill: none;
     stroke: var(--charcoal-gray);
     stroke-width: 10;
@@ -490,13 +489,13 @@ tr:nth-child(even){
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .calendar-btns .month-btns{
     display: flex;
     align-items: center;
-    gap: 0 20px;
+    gap: 0 5px;
 }
 
 .month-btns button{
@@ -541,17 +540,16 @@ tr:nth-child(even){
 
 .calendar .month{
     display: flex;
+    width: 100%;
     text-align: center;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 20px 0;
+    justify-content: space-between;
+    padding: 10px 0;
 }
 
 .month .prev,
 .month .next{
-    position: absolute;
-    font-size: 28px;
+    font-size: 24px;
     color: var(--Dark-text);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -562,17 +560,8 @@ tr:nth-child(even){
     color: var(--Muted-gray);
 }
 
-.month .prev{
-    left: 10px;
-}
-
-.month .next{
-    right: 10px;
-}
-
-
 .month #month{
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
@@ -602,6 +591,10 @@ tr:nth-child(even){
     cursor: pointer;
 }
 
+.month-days .day:hover{
+    background-color: rgb(238, 238, 238);
+}
+
 .month-days .prev-month,
 .month-days .next-month{
     color: var(--charcoal-gray);
@@ -616,10 +609,6 @@ tr:nth-child(even){
 .month-days .day.active{
     font-size: 20px;
     background-color: rgba(0, 0, 0, 0.05);
-}
-
-.month-day:last-child .day{
-    border-right: none;
 }
 
 .day .hours{
@@ -671,6 +660,45 @@ tr:nth-child(even){
     .modal{
         width: 90%;
     }
+
+    .calendar {
+        max-width: 760px;    
+    }
+
+    .calendar .weekdays{
+        display: flex;
+        justify-content: space-evenly;
+        gap: 15px;
+        padding: 0;
+        /* margin-left: -5px; */
+        font-size: 16px;
+    }
+    
+    .calendar .weekdays span{
+        margin-left: -15px;
+    }
+
+    .month-days .day{
+        height: 50px;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .month-days .day.today{
+        font-size: 16px;
+    }
+
+    .day .hours{
+        font-size: 0px;
+        bottom: 5px;
+        padding: 5px;
+        width: 10px;
+        height: 10px;
+        border-left: none;
+        border-radius: 50%;
+        background-color: rgba(0, 116, 204, 0.5);
+    }
 }
 
 @media  screen and (max-width: 550px) {
@@ -682,6 +710,26 @@ tr:nth-child(even){
 @media  screen and (max-width: 320px) {
     .progress circle{
         cx: 70;
+    }
+    .calendar-btns .month-btns{
+        gap: 0 5px;
+    }
+    
+    .month-btns button{
+        width: 50%;
+        padding: 5px 10px;
+    }
+}
+
+@media screen and (max-width: 280px){
+    .calendar .weekdays{
+        font-size: 14px;
+        margin-left: -10px;
+        gap: 10px;
+    }
+
+    .calendar .weekdays span{
+        margin-left: 0px;
     }
 }
 

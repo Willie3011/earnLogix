@@ -33,11 +33,6 @@ function toggleDropdown(){
 //sidebar toggling
 let btn = document.querySelector("#btn");
 let sidebar = document.querySelector(".sidebar");
-let listItems = sidebar.querySelectorAll("ul li");
-
-listItems.forEach(listItem => {
-    listItem.addEventListener("click", () => sidebar.classList.toggle("active"))
-})
 
 btn.addEventListener("click", () => sidebar.classList.toggle("active"));
 
@@ -80,6 +75,20 @@ window.onload = () => {
     setProgress(".p4", 120, 200);
 }
 
+const Months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+]
 
 // Calendar Days
 function loadDays(){
@@ -102,6 +111,8 @@ function loadDays(){
     //next month days
     const nextMonthDays = 7 - lastDay.getDay() - 1;
     
+    const monthEl = document.getElementById("month");
+    monthEl.textContent = `${Months[month]} ${year}`
     //get the calendar
     const calendar = document.querySelector(".calendar");
     const daysContainer = calendar.querySelector(".month-days");
@@ -109,10 +120,11 @@ function loadDays(){
     let days = "";
 
     //adding previous month days
-    for (let i = firstDay.getDay(); i > 0; i--) {
-        const day = `<div class="day prev-month">${prevDays - i + 1}</div>`;
-        days += day;
-    }
+    // Assuming firstDay is the first day of the current month and prevDays is the number of days in the previous month
+for (let i = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; i > 0; i--) {
+    const day = `<div class="day prev-month">${prevDays - i + 1}</div>`;
+    days += day;
+}
 
     //adding current month days
     for(let i = 1; i <= numOfDays; i++){
