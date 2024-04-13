@@ -15,8 +15,6 @@
     --Muted-gray: #afafaf;
 }
 
-
-
 *{
     margin: 0;
     padding: 0;
@@ -357,5 +355,16 @@ form .input-group button{
     @media screen and (max-width: 768px) {
         .container{
             width: auto;
+        }
+
+        .right h1{
+            font-size: 1.5rem;
+        }
+
+        .right p{
+            font-size: 12px;
+        }
+        .sign-in-container h1{
+            font-size: 1.5rem;
         }
     }

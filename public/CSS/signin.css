@@ -383,4 +383,16 @@ form .input-group button{
         .container{
             width: auto;
         }
+
+        .left h1{
+            font-size: 1.5rem;
+        }
+
+        .left form p{
+            font-size: 12px;
+        }
+
+        .sign-up-container h1{
+            font-size: 1.5rem;
+        }
     }
