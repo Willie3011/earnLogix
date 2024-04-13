@@ -140,5 +140,27 @@ async function validateInput() {
 // save to database
 async function saveToDatabase(person) {
   createUserWithEmailAndPassword(auth, person.email, person.password)
-  .then(() => window.location.href = "signin.html")
+  .then((cred) => {
+    const userCollection = collection(db, "users");
+    const user = cred.user;
+    const userID = user.uid;
+
+    addDoc(userCollection, {
+      name: person.name,
+      surname: person.surname,
+      userID: userID,
+    })
+    .then(() => {
+      window.location.href = "signin.html"
+    })
+    .catch((error) => {
+      const passwordError = document.querySelector(".password-error");
+      passwordError.textContent = error.message;
+  
+    })
+  })
+  .catch((error) => {
+    const passwordError = document.querySelector(".password-error");
+      passwordError.textContent = error.message;
+  })
 }

@@ -80,8 +80,6 @@ function signIn(person){
     })
     .catch((error) => {
         let passwordError = document.getElementById("password-error");
-        if(error.message === "auth/invalid-credential"){
-        }
         passwordError.textContent = error.message;
 
     })
