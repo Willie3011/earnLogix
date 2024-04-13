@@ -1,3 +1,16 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js'
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBG7pWbi1t_A50kJ4uYQSiTIg5ePgarRdA",
+    authDomain: "earnlogix.firebaseapp.com",
+    projectId: "earnlogix",
+    appId: "1:397114869781:web:c69d554385794cfa01e61c"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 //Check if the user signed in before accessing dashboard else redirect user to sign in page
 const authenticated = sessionStorage.getItem("authenticated");
 if(!authenticated || authenticated !== "true"){
@@ -25,11 +38,6 @@ const username = document.getElementById("username");
 
 username.textContent = sessionStorage.getItem("username");
 
-function toggleDropdown(){
-    let dropDownContent = document.querySelector(".dropdownContent");
-    dropDownContent.classList.toggle("active");
-}
-
 //sidebar toggling
 let btn = document.querySelector("#btn");
 let sidebar = document.querySelector(".sidebar");
@@ -51,6 +59,7 @@ headerBtn.addEventListener("click", () => {
 const logout = document.getElementById("log-out");
 
 logout.addEventListener("click", () => {
+    auth.signOut();
     sessionStorage.removeItem("authenticated");
     sessionStorage.removeItem("loginTime");
     window.location.href = "signin.html"

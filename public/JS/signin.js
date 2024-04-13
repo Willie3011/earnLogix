@@ -1,3 +1,15 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBG7pWbi1t_A50kJ4uYQSiTIg5ePgarRdA",
+    authDomain: "earnlogix.firebaseapp.com",
+    projectId: "earnlogix",
+    appId: "1:397114869781:web:c69d554385794cfa01e61c"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 const signUpBtn = document.querySelector(".sign-up-btn");
 const toggle = document.querySelector('.toggle');
 const nav = document.querySelector('nav');
@@ -58,41 +70,19 @@ function validateInputs(){
 }
 
 function signIn(person){
-    let request = window.indexedDB.open("earnLogix", 1);
-    request.onsuccess = function(event){
-        let db = event.target.result;
-
-        let transaction = db.transaction(["users"], "readonly");
-        let objectStore = transaction.objectStore("users");
-
-
-        let getRequest = objectStore.get(person.email);
-
-
-        getRequest.onsuccess = function(event){
-            let user = event.target.result;
-            let name = user.name,
-            surname = user.surname,
-            fullName = `${name} ${surname}`;
-
-            sessionStorage.setItem("username", fullName);
-            if(user && user.password === person.password){
-                //set authentication to true
-                sessionStorage.setItem("authenticated", "true");
+    signInWithEmailAndPassword(auth, person.email, person.password)
+    .then(() => {
+        sessionStorage.setItem("authenticated", "true");
                 
-                //set login time
-                sessionStorage.setItem("loginTime", Date.now());
-                window.location.href = "dashboard.html"
-            }
-            else{
-                const passwordError = document.getElementById("password-error");
-                passwordError.textContent = "Email Address or Password does not match";
-            }
-        };
-
-
-        getRequest.onerror = function(event){
-            console.error("Error retrieving person from IndexDB", event.target.error);
+        //set login time
+        sessionStorage.setItem("loginTime", Date.now());
+        window.location = "dashboard.html";
+    })
+    .catch((error) => {
+        let passwordError = document.getElementById("password-error");
+        if(error.message === "auth/invalid-credential"){
         }
-    }
+        passwordError.textContent = error.message;
+
+    })
 }
