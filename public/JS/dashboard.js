@@ -9,7 +9,9 @@ import {
   onSnapshot,
   collection,
   doc,
+  addDoc,
   getDoc,
+  getDocs,
   query,
   where,
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
@@ -22,9 +24,11 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+let userID;
 
 onAuthStateChanged(auth, async (user) => {
-  const userID = user.uid;
+  userID = user.uid;
   const db = getFirestore(app);
   const usersCollection = collection(db, "users");
   const q = query(usersCollection, where("userID", "==", userID));
@@ -174,7 +178,6 @@ function loadDays() {
   }
 
   //adding next month days
-  console.log(nextMonthDays);
   for (let i = 1; i <= nextMonthDays; i++) {
     const day = `<div class="day next-month">${i}</div>`;
     days += day;
@@ -188,6 +191,8 @@ const addBtn = document.getElementById("addBtn");
 const closeModal = document.querySelector("#close-modal");
 const cancelBtn = document.querySelector("#cancel-btn");
 const addHoursBtn = document.querySelector("#add-hours-btn");
+const radioBtns = document.querySelectorAll(".radio-btn");
+let dayOff = false;
 
 addBtn.addEventListener("click", () => {
   addHoursModal.classList.add("active");
@@ -203,3 +208,85 @@ cancelBtn.addEventListener("click", () => {
   addHoursModal.classList.remove("active");
   document.querySelector(".overlay").style.display = "none";
 });
+
+radioBtns.forEach((radio) => {
+  radio.addEventListener("click", () => {
+    if (radio.checked) {
+      if (radio.value === "Day-off") {
+        document
+          .getElementById("hours-worked")
+          .attributes.setNamedItem(document.createAttribute("disabled"));
+        document.getElementById("hours-worked").value = "0";
+        dayOff = true;
+      } else if (
+        radio.value === "Working-day" ||
+        (radio.value === "Working-day" &&
+          document.getElementById("hours-worked").disabled)
+      ) {
+        document.getElementById("hours-worked").disabled = false;
+        document.getElementById("hours-worked").value = "";
+        dayOff = false;
+      }
+    }
+  });
+});
+addHoursBtn.addEventListener("click", saveHours);
+
+async function saveHours() {
+
+  //get data from the modal when the user clicks the add hours button
+  let hoursWorked = document.getElementById("hours-worked").value;
+  let workDate = document.getElementById("date").value;
+
+
+  if(hoursWorked == ""|| workDate == ""){
+    document.querySelector("#error").textContent = "Please fill in all fields";
+    document.getElementById("hours-worked").focus();
+  }
+  else{
+    document.querySelector("#error").textContent = "";
+    //create a hoursWorked object
+  const hoursObj = {
+    hours: hoursWorked,
+    date: workDate,
+    dayOff: dayOff,
+  };
+
+  const usersCollection = collection(db, "users");
+  let collectionID;
+  
+  try {
+    const querySnapshot = await getDocs(
+      query(usersCollection, where("userID", "==", userID))
+    );
+    if (!querySnapshot.empty) {
+      // Get the first document that matches the query
+      const userDoc = querySnapshot.docs[0];
+
+      // Return the ID of the document
+      collectionID = userDoc.id;
+    }
+  } catch (error) {
+    document.querySelector("#error").textContent = error.message;
+  }
+  
+  try {
+    // Ensure collectionID is defined before proceeding
+    if (collectionID) {
+      const userDocRef = doc(db, "users", collectionID);
+      const hoursCollection = collection(userDocRef, "hours");
+      await addDoc(hoursCollection, hoursObj);
+      
+      //close modal and remove overlay
+      addHoursModal.classList.remove("active");
+      document.querySelector(".overlay").style.display = "none";
+    } else {
+      document.querySelector("#error").textContent = "User document ID not found."
+    }
+  } catch (error) {
+    document.querySelector("#error").textContent = error.message;
+  }
+  }
+  
+}
+

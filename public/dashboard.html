@@ -16,9 +16,7 @@
       <div class="logo-content">
         <i class="bx bx-menu" id="btn"></i>
         <div class="logo">
-          <div class="logo-name">
-            earn<span>Logix</span>
-          </div>
+          <div class="logo-name">earn<span>Logix</span></div>
         </div>
       </div>
       <ul>
@@ -62,7 +60,7 @@
       <div class="profile-content">
         <div class="profile">
           <div class="profile-details">
-            <img src="./assets/profile-picture.png" alt="Profile Picture">
+            <img src="./assets/profile-picture.png" alt="Profile Picture" />
             <div class="name-details">
               <div class="name" id="username"></div>
             </div>
@@ -76,9 +74,7 @@
         <div class="logo-content">
           <i class="bx bx-menu" id="header-toggle-btn"></i>
           <div class="logo">
-            <div class="logo-name">
-              earn<span>Logix</span>
-            </div>
+            <div class="logo-name">earn<span>Logix</span></div>
           </div>
         </div>
         <div class="dropdown">
@@ -105,12 +101,16 @@
             <div class="middle">
               <div class="left">
                 <h3>Expected Salary</h3>
-                <h1 id="salary"> R2 786.32</h1>
+                <h1 id="salary">R2 786.32</h1>
               </div>
               <div class="progress">
                 <svg>
                   <circle cx="70" cy="70" r="40"></circle>
-                  <circle class="circle-progress p1" cx="70" cy="70" r="40"></circle>
+                  <circle
+                    class="circle-progress p1"
+                    cx="70"
+                    cy="70"
+                    r="40"></circle>
                 </svg>
               </div>
             </div>
@@ -126,7 +126,11 @@
               <div class="progress">
                 <svg>
                   <circle cx="70" cy="70" r="40"></circle>
-                  <circle class="circle-progress p2" cx="70" cy="70" r="40"></circle>
+                  <circle
+                    class="circle-progress p2"
+                    cx="70"
+                    cy="70"
+                    r="40"></circle>
                 </svg>
               </div>
             </div>
@@ -142,7 +146,11 @@
               <div class="progress">
                 <svg>
                   <circle cx="70" cy="70" r="40"></circle>
-                  <circle class="circle-progress p3" cx="70" cy="70" r="40"></circle>
+                  <circle
+                    class="circle-progress p3"
+                    cx="70"
+                    cy="70"
+                    r="40"></circle>
                 </svg>
               </div>
             </div>
@@ -158,15 +166,18 @@
               <div class="progress">
                 <svg>
                   <circle cx="70" cy="70" r="40"></circle>
-                  <circle class="circle-progress p4" cx="70" cy="70" r="40"></circle>
+                  <circle
+                    class="circle-progress p4"
+                    cx="70"
+                    cy="70"
+                    r="40"></circle>
                 </svg>
               </div>
             </div>
             <small class="text-muted">Last Updated 24 Hours</small>
           </div>
         </div>
-        
-        
+
         <!-- Hours history table -->
         <div class="dataTable">
           <div class="head">
@@ -176,18 +187,10 @@
           <table>
             <thead>
               <tr>
-                <th>
-                  Date
-                </th>
-                <th>
-                  Day
-                </th>
-                <th>
-                  Hours Worked
-                </th>
-                <th>
-                  Daily Total
-                </th>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Hours Worked</th>
+                <th>Daily Total</th>
               </tr>
             </thead>
             <tbody>
@@ -250,11 +253,10 @@
       </section>
       <!-- End of Dashboard Overview -->
 
-
       <!-- Income Tracking Section Starts -->
       <section class="income-tracking" id="income-tracking">
         <h2>Income Tracking</h2>
-        
+
         <!-- Button header -->
         <div class="calendar-btns">
           <div class="month-btns">
@@ -273,15 +275,28 @@
           </div>
           <div class="body">
             <div class="working">
-              <label for="working-day">Working day</label>
-              <input type="radio" name="working-day" id="working-day">
-              <label for="day-off">Day-off</label>
-              <input type="radio" name="working-day" id="day-off">
+              <div>
+                <label for="working-day">
+                  <span>Working day</span>
+                  <input class="radio-btn" type="radio" name="working-day" id="working-day" value="Working-day" checked/>
+                </label>
+              </div>
+              <div>
+                <label for="day-off">
+                  <span>Day-off</span>
+                  <input class="radio-btn" type="radio" name="working-day" value="Day-off" id="day-off" />
+                </label>
+              </div>
             </div>
             <label for="hours-worked">Hours Worked</label>
-            <input type="text" id="hours-worked" placeholder="Add hours worked">
+            <input
+              type="number"
+              id="hours-worked"
+              placeholder="Add Hours Worked" 
+              pattern="[0-9]" required/>
             <label for="date">Date</label>
-            <input type="date" id="date">
+            <input type="date" id="date" required/>
+            <span id="error"></span>
           </div>
           <div class="footer">
             <button id="cancel-btn">Cancel</button>
@@ -306,8 +321,7 @@
             <span>Sat</span>
             <span>Sun</span>
           </div>
-          <div class="month-days">
-          </div>
+          <div class="month-days"></div>
         </div>
       </section>
     </main>
