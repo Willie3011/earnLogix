@@ -1,7 +1,43 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+import { getAuth, onAuthStateChanged ,signOut } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+import { getFirestore,
+    onSnapshot,
+    collection,
+    doc,
+    getDoc,
+    query,
+    where } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js'
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBG7pWbi1t_A50kJ4uYQSiTIg5ePgarRdA",
+    authDomain: "earnlogix.firebaseapp.com",
+    projectId: "earnlogix",
+    appId: "1:397114869781:web:c69d554385794cfa01e61c"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, async (user) => {
+    const userID = user.uid;
+    const db = getFirestore(app);
+    const usersCollection = collection(db, "users");
+    const q = query(usersCollection, where("userID", "==", userID));
+
+    let userInfo = {};
+    onSnapshot(q, (snapshot) => {
+        snapshot.docs.forEach((doc) => {
+            userInfo = doc.data();
+            const username = document.getElementById("username");
+            username.innerHTML = `${userInfo.name} ${userInfo.surname}`;
+    })
+    })
+})
+
 //Check if the user signed in before accessing dashboard else redirect user to sign in page
 const authenticated = sessionStorage.getItem("authenticated");
 if(!authenticated || authenticated !== "true"){
     window.location.href = "signin.html";
+    signOut();
 }
 else{
     const loginTime = sessionStorage.getItem("loginTime");
@@ -21,18 +57,6 @@ else{
     }
 }
 
-<<<<<<< Updated upstream:JS/dashboard.js
-const username = document.getElementById("username");
-
-username.textContent = sessionStorage.getItem("username");
-
-function toggleDropdown(){
-    let dropDownContent = document.querySelector(".dropdownContent");
-    dropDownContent.classList.toggle("active");
-}
-
-=======
->>>>>>> Stashed changes:public/JS/dashboard.js
 //sidebar toggling
 let btn = document.querySelector("#btn");
 let sidebar = document.querySelector(".sidebar");
@@ -50,6 +74,7 @@ headerBtn.addEventListener("click", () => {
 //logout button
 const logout = document.getElementById("log-out");
 logout.addEventListener("click", () => {
+    auth.signOut();
     sessionStorage.removeItem("authenticated");
     sessionStorage.removeItem("loginTime");
     window.location.href = "signin.html"
@@ -71,8 +96,10 @@ window.onload = () => {
     setProgress(".p2", 26, 31);
     setProgress(".p3", 9, 15);
     setProgress(".p4", 120, 200);
+    loadDays();
 }
 
+// Calendar Days
 const Months = [
     "January",
     "February",
@@ -88,7 +115,6 @@ const Months = [
     "December"
 ]
 
-// Calendar Days
 function loadDays(){
     let currentDate = new Date();
     //get year
@@ -148,4 +174,3 @@ for (let i = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; i > 0; i--) {
     daysContainer.innerHTML = days;
 }
 
-loadDays();

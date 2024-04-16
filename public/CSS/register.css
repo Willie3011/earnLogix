@@ -21,14 +21,12 @@
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    
 }
 
 body{
-    font-family:'Open Sans', sans-serif;
     width: 100%;
-    height: 100vh;
     overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif;
 }
 
 header{
@@ -89,7 +87,6 @@ header nav ul li a{
     display: none;
 }
 
-
 main{
     padding: 1rem;
 }
@@ -97,7 +94,7 @@ main{
 
 .container{
     width: 800px;
-    height: 500px;
+    height: auto;
     background-color: var(--cerulean);
     margin: 10px auto;
     display: flex;
@@ -108,7 +105,8 @@ main{
 }
 
 .container button
-{   
+{
+    
     width: 40%;
     height: 40px;
     background-color: var(--Crimson-Red);
@@ -126,7 +124,7 @@ main{
     background-color: var(--charcoal-gray);
 }
 
-.container .right{
+.container .left{
     width: 40%;
     height: 100%;
     overflow: hidden;
@@ -137,23 +135,21 @@ main{
     justify-content: center;
 }
 
-.right img{
+.left img{
     width: 100%;
     height: 100%;
     object-fit: contain;
-    margin-bottom: 2rem;
-    align-self: center;
 }
 
-.sign-up-container{
+.sign-in-container{
     margin-bottom: 2rem;
     display: flex;
-    text-align: center;
     align-items: center;
     flex-direction: column;
 }
 
-.sign-up-container h1{
+.sign-in-container h1{
+    text-align: center;
     margin-left: 1rem;
     font-size: 2rem;
     color: var(--honeydew);
@@ -161,52 +157,46 @@ main{
     font-weight: 600;
 }
 
-.sign-up-container p{
+.sign-in-container p{
     font-size: 0.85rem;
     font-weight: 400;
     color: var(--Muted-gray);
     margin-bottom: 1rem;
 }
 
-.container .sign-up-btn{
+.container .sign-in-btn{
     width: 65%;
     background: var(--Berkeley-blue);
 }
 
+.right{
 
-.left{
     width: 60%;
-    height: 100%;
 }
 
-.left form{
+.right form{
     padding: 1rem;
     width: 100%;
-    height: 100%;
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
-.left h1,
-.left p{
+.right h1,
+.right p{
     text-align: center;
 }
 
-.left h1{
+.right h1{
     font-size: 2rem;
     font-weight: 500;
 }
 
-.left p{
+.right p{
     font-size: 0.85rem;
     margin-bottom: 1.5rem;
 }
 
 form .input-group{
-    width: 100%;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 form .input-group label{
@@ -223,41 +213,33 @@ form .input-group input{
     outline: none;
     border: 1px solid #ccc;
 }
+
 form .input-group input.error{
     border: 1px solid var(--red-pantone);
 }
 
+form .input-group p{
+    text-align: left;
+    font-size: 0.7rem;
+    color: var(--charcoal-gray);
+    margin: 0;
+}
 
 form .input-group button{
-    margin: 0.25rem 0;
+    margin: 0.45rem 0;
     width: 100%;
 }
 
-.left form .forgot .forgot-pass{
-    text-align: left;
-    color: var(--Muted-gray);
-}
-
-.forgot-pass a{
-    color: var(--Electric-Blue);
-}
-
-.forgot-pass a:focus,
-.forgot-pass a:hover{
-    text-decoration: underline;
-}
-
+#name-error,
+#surname-error,
 #email-error,
-#password-error{
+#password-error,
+#confirm-password-error{
     color: var(--red-pantone);
-    text-align: left;
-    font-size: 0.7rem;
-    margin: 0;
 }
 
 .social-register {
     margin-bottom: 0.5rem;
-    width: 100%;
 }
 
 .social-register .socials ul{
@@ -309,11 +291,10 @@ form .input-group button{
             display: block;
             position: absolute;
             top: 65px;
-            right: 30px;
-            min-width: 50%;
+            min-width: 100%;
             height: auto;
-            background: #f9f9f9;
-        
+            background: var(--honeydew);
+            left: 0;
             flex-direction: column;
             padding: 1rem;
         }
@@ -337,7 +318,6 @@ form .input-group button{
             display: block;
             border: none;
             background: transparent;
-            font-size: 3rem;
             display: flex;
             align-items: center;
         }
@@ -354,17 +334,10 @@ form .input-group button{
     }    
     
     
-@media screen and (max-width: 800px) {
-        header nav.active{
-            width: 100%;
-            left: 0;
-            right: unset;
-        }
-
+    @media screen and (max-width: 800px) {
         .container{
-            flex-direction: column;
+            flex-direction: column-reverse;
             width: 700px;
-            height: auto;
         }
 
         .container .left{
@@ -379,8 +352,19 @@ form .input-group button{
 
     }
 
-@media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px) {
         .container{
             width: auto;
+        }
+
+        .right h1{
+            font-size: 1.5rem;
+        }
+
+        .right p{
+            font-size: 12px;
+        }
+        .sign-in-container h1{
+            font-size: 1.5rem;
         }
     }
