@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root{
+    --Berkeley-blue: #1d3557;
+    --cerulean: #457b9dff;
+    --Electric-Blue: #0074cc;
+    --non-photo-blue: #a8dadcff;
+    --honeydew: #f1faeeff;
+    --charcoal-gray: #aaaaaa;
+    --red-pantone: rgb(255, 107, 119);
+    --Crimson-Red: #e63946;
+    --White-text: #fff;
+    --Dark-text: #000011;
+    --Muted-gray: #afafaf;
+
+    --accent-color-1: hsla(215, 85%, 61%, 0.788) ;
+}
+
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+}
+
+body{
+    font-family: "Open Sans", sans-serif;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+main{
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.sidebar{
+    background: var(--Berkeley-blue);
+    width: 240px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 6px 14px;
+    height: 100%;
+    transition: 0.5s ease;
+}
+
+.sidebar .logo-content .logo{
+    color: var(--White-text);
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    opacity: 1;
+    pointer-events: none;
+    transition: 0.5s ease;
+}
+
+.logo-content .logo .logo-name{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.logo-content .logo .logo-name span{
+    color: var(--cerulean);
+}
+
+.sidebar #btn{
+    position: absolute;
+    color: var(--White-text);
+    left: 90%;
+    top: 6px;
+    font-size: 24px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+    display: none;
+}
+
+.sidebar ul{
+    margin-top: 20px;
+}
+
+.sidebar ul li{
+    position: relative;
+    height: 50px;
+    width: 100%;
+}
+
+.sidebar ul li a{
+    color: var(--White-text);
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
+.sidebar ul li a:hover{
+    color: var(--Berkeley-blue);
+    background-color: var(--White-text);
+}
+
+.sidebar ul li i{
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.sidebar .link-name{
+    opacity: 1;
+    pointer-events: none;
+    transition: 0.5s ease;
+}
+
+.sidebar .profile-content{
+    position: absolute;
+    color: var(--White-text);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar .profile-content .profile{
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background-color: none;
+    background-color: var(--cerulean);
+}
+
+.profile-content .profile .profile-details{
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.profile .profile-details img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.profile .profile-details .name-details{
+    margin-left: 10px;
+}
+
+.profile .profile-details .name{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.profile #log-out{
+    position: absolute;
+    left: 88%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border-radius: 12px;
+    text-align: center;
+    background-color: var(--cerulean);
+    transition: all 0.4s ease;
+}

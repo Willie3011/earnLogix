@@ -57,17 +57,13 @@ else{
     }
 }
 
-
-
 //sidebar toggling
 let btn = document.querySelector("#btn");
 let sidebar = document.querySelector(".sidebar");
 
 btn.addEventListener("click", () => sidebar.classList.toggle("active"));
-
 //toggle button for smaller screens
 let headerBtn = document.querySelector("#header-toggle-btn");
-
 headerBtn.addEventListener("click", () => {
     sidebar.classList.toggle("active")
     btn.classList.add("bx-x");
@@ -75,10 +71,8 @@ headerBtn.addEventListener("click", () => {
     btn.addEventListener("click", () => btn.classList.remove("bx-x"))
 });
 
-
 //logout button
 const logout = document.getElementById("log-out");
-
 logout.addEventListener("click", () => {
     auth.signOut();
     sessionStorage.removeItem("authenticated");
@@ -88,7 +82,6 @@ logout.addEventListener("click", () => {
 });
 
 //Card progress circles
-
 function setProgress(className, value, limit){
     const progress = document.querySelector(className);
     const radius = progress.getAttribute("r");
