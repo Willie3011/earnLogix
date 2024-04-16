@@ -263,9 +263,32 @@
           </div>
 
           <div class="addBtn">
-            <button class="add">+</button>
+            <button class="add" id="addBtn">+</button>
           </div>
         </div>
+        <div class="add-modal" id="add-hours-modal">
+          <div class="head">
+            <h2>Add hours</h2>
+            <button id="close-modal"><i class="bx bx-x"></i></button>
+          </div>
+          <div class="body">
+            <div class="working">
+              <label for="working-day">Working day</label>
+              <input type="radio" name="working-day" id="working-day">
+              <label for="day-off">Day-off</label>
+              <input type="radio" name="working-day" id="day-off">
+            </div>
+            <label for="hours-worked">Hours Worked</label>
+            <input type="text" id="hours-worked" placeholder="Add hours worked">
+            <label for="date">Date</label>
+            <input type="date" id="date">
+          </div>
+          <div class="footer">
+            <button id="cancel-btn">Cancel</button>
+            <button id="add-hours-btn">Add Hours</button>
+          </div>
+        </div>
+        <div class="overlay"></div>
 
         <!-- Calendar Section -->
         <div class="calendar">
