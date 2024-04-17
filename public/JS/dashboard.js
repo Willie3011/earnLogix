@@ -42,6 +42,8 @@ onAuthStateChanged(auth, async (user) => {
     });
   });
 
+  loadDays();
+  await updateCards(userID);
   await displayHoursInTable(userID);
 });
 
@@ -98,14 +100,6 @@ function setProgress(className, value, limit) {
   progress.style.strokeDasharray = `${circumference} ${circumference}`;
   progress.style.strokeDashoffset = offset;
 }
-
-window.onload = () => {
-  setProgress(".p1", 2786, 5000);
-  setProgress(".p2", 26, 31);
-  setProgress(".p3", 9, 15);
-  setProgress(".p4", 120, 200);
-  loadDays();
-};
 
 // Calendar Days
 const Months = [
@@ -251,24 +245,8 @@ async function saveHours() {
       dayOff: dayOff,
     };
 
-    const usersCollection = collection(db, "users");
-    let collectionID;
     try {
-      const querySnapshot = await getDocs(
-        query(usersCollection, where("userID", "==", userID))
-      );
-      if (!querySnapshot.empty) {
-        // Get the first document that matches the query
-        const userDoc = querySnapshot.docs[0];
-
-        // Return the ID of the document
-        collectionID = userDoc.id;
-      }
-    } catch (error) {
-      document.querySelector("#error").textContent = error.message;
-    }
-
-    try {
+      const collectionID = await getUserCollectionID(userID);
       // Ensure collectionID is defined before proceeding
       if (collectionID) {
         const userDocRef = doc(db, "users", collectionID);
@@ -301,24 +279,8 @@ async function saveHours() {
 //update input history with data
 async function displayHoursInTable(userID) {
   const hoursTable = document.getElementById("input-history");
-
-  const usersCollection = collection(db, "users");
-  let collectionID;
   try {
-    const querySnapshot = await getDocs(
-      query(usersCollection, where("userID", "==", userID))
-    );
-    if (!querySnapshot.empty) {
-      // Get the first document that matches the query
-      const userDoc = querySnapshot.docs[0];
-      // Return the ID of the document
-      collectionID = userDoc.id;
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  try {
+    let collectionID = await getUserCollectionID(userID);
     let hourlyRate;
     // Ensure collectionID is defined before proceeding
     const userDocRef = doc(db, "users", collectionID);
@@ -374,6 +336,83 @@ async function displayHoursInTable(userID) {
     rows.forEach((row) => hoursTable.appendChild(row));
   } catch (error) {
     console.log("Error displaying hours: ", error);
+  }
+}
+
+async function getUserCollectionID(userID) {
+  const usersCollection = collection(db, "users");
+  let collectionID;
+  try {
+    const querySnapshot = await getDocs(
+      query(usersCollection, where("userID", "==", userID))
+    );
+    if (!querySnapshot.empty) {
+      // Get the first document that matches the query
+      const userDoc = querySnapshot.docs[0];
+
+      // Return the ID of the document
+      collectionID = userDoc.id;
+      return collectionID;
+    } else {
+      // If no document matches the query, return null
+      return null;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function updateCards(userID) {
+  const collectionID = await getUserCollectionID(userID);
+
+  if (collectionID) {
+    try {
+      const userDocRef = doc(db, "users", collectionID);
+      const querySnapshot = await getDocs(collection(userDocRef, "hours"));
+      let salary = 0;
+      let workingDays = 0;
+      let daysOff = 0;
+      let totalHours = 0;
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.hours > 0) {
+            workingDays++;
+            totalHours += parseInt(data.hours);
+          } else if (data.hours) {
+            daysOff++;
+          }
+        });
+      }
+
+      let hourlyRate;
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const user = userDoc.data();
+        hourlyRate = user.hourlyRate;
+      }
+
+      salary = hourlyRate * totalHours;
+      //update the card data
+      document.querySelector("#salary").innerHTML = `R ${salary.toFixed(2)}`;
+      document.querySelector(
+        "#days-worked"
+      ).innerHTML = `${workingDays} <span>Days</span>`;
+      document.querySelector(
+        "#days-off"
+      ).innerHTML = `${daysOff} <span>Days</span>`;
+      document.querySelector(
+        "#hours-worked"
+      ).innerHTML = `${totalHours} <span>Hours</span>`;
+
+      //set the progress bars
+      setProgress(".p1", salary, 5000);
+      setProgress(".p2", workingDays, 31);
+      setProgress(".p3", daysOff, 15);
+      setProgress(".p4", totalHours, 200);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 }
 
