@@ -230,7 +230,7 @@ addHoursBtn.addEventListener("click", saveHours);
 
 async function saveHours() {
   //get data from the modal when the user clicks the add hours button
-  let hoursWorked = document.getElementById("hours-worked").value;
+  let hoursWorked = document.getElementById("hours-worked-input").value;
   let workDate = document.getElementById("date").value;
 
   if (hoursWorked == "" || workDate == "") {
@@ -244,7 +244,7 @@ async function saveHours() {
       date: workDate,
       dayOff: dayOff,
     };
-    
+
     try {
       const collectionID = await getUserCollectionID(userID);
       // Ensure collectionID is defined before proceeding
@@ -263,6 +263,7 @@ async function saveHours() {
         } else {
           //create new document
           await addDoc(hoursCollection, hoursObj);
+          await updateCards(userID);
           await displayHoursInTable(userID);
           //close modal and remove overlay
           addHoursModal.classList.remove("active");
