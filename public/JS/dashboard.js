@@ -235,7 +235,7 @@ async function saveHours() {
 
   if (hoursWorked == "" || workDate == "") {
     document.querySelector("#error").textContent = "Please fill in all fields";
-    document.getElementById("hours-worked").focus();
+    document.getElementById("hours-worked-input").focus();
   } else {
     document.querySelector("#error").textContent = "";
     //create a hoursWorked object
@@ -244,7 +244,7 @@ async function saveHours() {
       date: workDate,
       dayOff: dayOff,
     };
-
+    
     try {
       const collectionID = await getUserCollectionID(userID);
       // Ensure collectionID is defined before proceeding
@@ -252,10 +252,12 @@ async function saveHours() {
         const userDocRef = doc(db, "users", collectionID);
         const hoursCollection = collection(userDocRef, "hours");
 
+        //check if the date entered already exists in the database
         const querySnapshot = await getDocs(
           query(hoursCollection, where("date", "==", workDate))
         );
         if (!querySnapshot.empty) {
+          //if the date exists, throw an error
           document.querySelector("#error").textContent =
             "You have already inputted hours for this date.";
         } else {
@@ -272,6 +274,7 @@ async function saveHours() {
       }
     } catch (error) {
       document.querySelector("#error").textContent = error.message;
+      console.log(error);
     }
   }
 }
