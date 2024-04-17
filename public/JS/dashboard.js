@@ -41,6 +41,8 @@ onAuthStateChanged(auth, async (user) => {
       username.innerHTML = `${userInfo.name} ${userInfo.surname}`;
     });
   });
+
+  await displayHoursInTable(userID);
 });
 
 //Check if the user signed in before accessing dashboard else redirect user to sign in page
@@ -233,28 +235,75 @@ radioBtns.forEach((radio) => {
 addHoursBtn.addEventListener("click", saveHours);
 
 async function saveHours() {
-
   //get data from the modal when the user clicks the add hours button
   let hoursWorked = document.getElementById("hours-worked").value;
   let workDate = document.getElementById("date").value;
 
-
-  if(hoursWorked == ""|| workDate == ""){
+  if (hoursWorked == "" || workDate == "") {
     document.querySelector("#error").textContent = "Please fill in all fields";
     document.getElementById("hours-worked").focus();
-  }
-  else{
+  } else {
     document.querySelector("#error").textContent = "";
     //create a hoursWorked object
-  const hoursObj = {
-    hours: hoursWorked,
-    date: workDate,
-    dayOff: dayOff,
-  };
+    const hoursObj = {
+      hours: hoursWorked,
+      date: workDate,
+      dayOff: dayOff,
+    };
+
+    const usersCollection = collection(db, "users");
+    let collectionID;
+    try {
+      const querySnapshot = await getDocs(
+        query(usersCollection, where("userID", "==", userID))
+      );
+      if (!querySnapshot.empty) {
+        // Get the first document that matches the query
+        const userDoc = querySnapshot.docs[0];
+
+        // Return the ID of the document
+        collectionID = userDoc.id;
+      }
+    } catch (error) {
+      document.querySelector("#error").textContent = error.message;
+    }
+
+    try {
+      // Ensure collectionID is defined before proceeding
+      if (collectionID) {
+        const userDocRef = doc(db, "users", collectionID);
+        const hoursCollection = collection(userDocRef, "hours");
+
+        const querySnapshot = await getDocs(
+          query(hoursCollection, where("date", "==", workDate))
+        );
+        if (!querySnapshot.empty) {
+          document.querySelector("#error").textContent =
+            "You have already inputted hours for this date.";
+        } else {
+          //create new document
+          await addDoc(hoursCollection, hoursObj);
+          await displayHoursInTable(userID);
+          //close modal and remove overlay
+          addHoursModal.classList.remove("active");
+          document.querySelector(".overlay").style.display = "none";
+        }
+      } else {
+        document.querySelector("#error").textContent =
+          "User document ID not found.";
+      }
+    } catch (error) {
+      document.querySelector("#error").textContent = error.message;
+    }
+  }
+}
+
+//update input history with data
+async function displayHoursInTable(userID) {
+  const hoursTable = document.getElementById("input-history");
 
   const usersCollection = collection(db, "users");
   let collectionID;
-  
   try {
     const querySnapshot = await getDocs(
       query(usersCollection, where("userID", "==", userID))
@@ -262,31 +311,91 @@ async function saveHours() {
     if (!querySnapshot.empty) {
       // Get the first document that matches the query
       const userDoc = querySnapshot.docs[0];
-
       // Return the ID of the document
       collectionID = userDoc.id;
     }
   } catch (error) {
-    document.querySelector("#error").textContent = error.message;
+    console.log(error.message);
   }
-  
+
   try {
+    let hourlyRate;
     // Ensure collectionID is defined before proceeding
-    if (collectionID) {
-      const userDocRef = doc(db, "users", collectionID);
-      const hoursCollection = collection(userDocRef, "hours");
-      await addDoc(hoursCollection, hoursObj);
-      
-      //close modal and remove overlay
-      addHoursModal.classList.remove("active");
-      document.querySelector(".overlay").style.display = "none";
-    } else {
-      document.querySelector("#error").textContent = "User document ID not found."
+    const userDocRef = doc(db, "users", collectionID);
+
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      const user = userDoc.data();
+      hourlyRate = user.hourlyRate;
     }
+
+    const querySnapshot = await getDocs(collection(userDocRef, "hours"));
+
+    // Clear existing table rows
+    hoursTable.innerHTML = "";
+
+    const rows = [];
+    // Loop through the query snapshot
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      // Create a table row for each document
+      const row = document.createElement("tr");
+
+      // Add cells for each data field
+      let date = new Date(data.date);
+      const dateCell = document.createElement("td");
+      dateCell.textContent = formatDate(date);
+      row.appendChild(dateCell);
+
+      const dayOfWeekCell = document.createElement("td");
+      const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"][
+        date.getDay()
+      ];
+      dayOfWeekCell.textContent = dayOfWeek;
+      row.appendChild(dayOfWeekCell);
+
+      const hoursWorkedCell = document.createElement("td");
+      hoursWorkedCell.textContent = data.hours === "0" ? "Day off" : data.hours;
+      row.appendChild(hoursWorkedCell);
+
+      const totalAmountCell = document.createElement("td");
+      const totalAmount = data.hours * hourlyRate;
+      totalAmountCell.textContent = totalAmount.toFixed(2); // Assuming you want to display the amount with two decimal places
+      row.appendChild(totalAmountCell);
+      rows.push(row);
+    });
+    rows.sort((a, b) => {
+      const dateA = new Date(a.cells[0].textContent);
+      const dateB = new Date(b.cells[0].textContent);
+      return dateA - dateB;
+    });
+
+    // Append the sorted rows to the table
+    rows.forEach((row) => hoursTable.appendChild(row));
   } catch (error) {
-    document.querySelector("#error").textContent = error.message;
+    console.log("Error displaying hours: ", error);
   }
-  }
-  
 }
 
+//formatting the date for the table
+function formatDate(dateString) {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+}

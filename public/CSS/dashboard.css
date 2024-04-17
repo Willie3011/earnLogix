@@ -461,6 +461,11 @@ tr:nth-child(even) {
   background-color: rgba(141, 188, 255, 0.05);
 }
 
+.no-data-row{
+  text-align: center;
+  /* display: none; */
+}
+
 .see-more,
 .see-less {
   font-size: 14px;
@@ -575,7 +580,7 @@ tr:nth-child(even) {
 
 .body input[type="number"],
 .body input[type="date"] {
-  background-color: rgb(238, 238, 238);
+  background-color: rgba(238, 238, 238, 0.4);
   padding: 10px 20px;
   width: 100%;
   border-radius: 6px;
