@@ -45,6 +45,7 @@ onAuthStateChanged(auth, async (user) => {
   loadDays();
   await updateCards(userID);
   await displayHoursInTable(userID);
+  await updateCalendarHours(userID);
 });
 
 //Check if the user signed in before accessing dashboard else redirect user to sign in page
@@ -116,13 +117,13 @@ const Months = [
   "November",
   "December",
 ];
+let currentDate = new Date();
+//get year
+let year = currentDate.getFullYear();
+//get month
+let month = currentDate.getMonth();
 
 function loadDays() {
-  let currentDate = new Date();
-  //get year
-  const year = currentDate.getFullYear();
-  //get month
-  const month = currentDate.getMonth();
 
   //previous month days
   const prevLastDay = new Date(year, month, 0);
@@ -160,14 +161,15 @@ function loadDays() {
   for (let i = 1; i <= numOfDays; i++) {
     //check if date is today
     let day;
+    const dateAttribute = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
     if (
       i === currentDate.getDate() &&
       year === currentDate.getFullYear() &&
       month === currentDate.getMonth()
     ) {
-      day = `<div class="day today">${i}</div>`;
+      day = `<div class="day today" data-date="${dateAttribute}">${i}</div>`;
     } else {
-      day = `<div class="day">${currentDay}</div>`;
+      day = `<div class="day" data-date="${dateAttribute}">${currentDay}</div>`;
     }
     days += day;
     currentDay++;
@@ -180,6 +182,34 @@ function loadDays() {
   }
   daysContainer.innerHTML = days;
 }
+//add functionality to the calendar buttons
+const prevMonth = document.querySelector(".prev-month");
+const nextMonth = document.querySelector(".next-month");
+
+prevMonth.addEventListener("click", () =>{
+  month = month - 1
+  
+  if(month < 0){
+    month = 11;
+    year = year - 1;
+    loadDays();
+  }
+  {
+    loadDays();
+  }
+});
+
+nextMonth.addEventListener("click", () =>{
+  month = month + 1;
+  if(month > 11){
+    month = 0;
+    year = year + 1;
+    loadDays();
+  }
+  else{
+    loadDays();
+  }
+});
 
 //add hours modal
 const addHoursModal = document.querySelector("#add-hours-modal");
@@ -418,6 +448,70 @@ async function updateCards(userID) {
       console.log(error.message);
     }
   }
+}
+
+async function getHoursCollection(collectionID) {
+  if(collectionID){
+    try {
+      const userDocRef = await doc(db, "users", collectionID);
+      const hoursCollection = await collection(userDocRef, "hours");
+
+      return hoursCollection;
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+  else{
+    return null;
+  }
+}
+
+async function updateCalendarHours(userID){
+  const collectionID = await getUserCollectionID(userID);
+
+  const hoursCollection = await getHoursCollection(collectionID);
+  const calendarDays = document.querySelectorAll(".day");
+  const querySnapshot = await getDocs(hoursCollection);
+
+  //if the user has hours in the database
+  if(!querySnapshot.empty){
+    const userDates = [];
+      querySnapshot.forEach(doc => {
+        const date = doc.data().date;
+        const hours = doc.data().hours;
+        userDates.push({
+        date: date,
+        hours: hours
+        });
+        console.log(userDates);
+      });
+
+    calendarDays.forEach(day => {
+      let date = day.dataset.date;
+      for(let i = 0; i < userDates.length; i++){
+        if (userDates[i].date === date) {
+          // Create a div to display hours
+          const hoursDiv = document.createElement("div");
+          hoursDiv.classList.add("hours");
+          if(userDates[i].hours === "0"){
+            //Display day off
+            hoursDiv.textContent = "Day off";
+            hoursDiv.classList.add("day-off");
+          }
+          else{
+            //Display hours
+            hoursDiv.textContent = userDates[i].hours + " hours"; 
+          }
+        day.appendChild(hoursDiv);
+      }
+      }
+    });
+  }
+  //if the user has no hours in the database
+  else{
+    loadDays();
+  }
+  
 }
 
 //formatting the date for the table
