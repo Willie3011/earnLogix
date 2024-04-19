@@ -240,17 +240,17 @@ radioBtns.forEach((radio) => {
     if (radio.checked) {
       if (radio.value === "Day-off") {
         document
-          .getElementById("hours-worked")
+          .getElementById("hours-worked-input")
           .attributes.setNamedItem(document.createAttribute("disabled"));
-        document.getElementById("hours-worked").value = "0";
+        document.getElementById("hours-worked-input").value = "0";
         dayOff = true;
       } else if (
         radio.value === "Working-day" ||
         (radio.value === "Working-day" &&
-          document.getElementById("hours-worked").disabled)
+          document.getElementById("hours-worked-input").disabled)
       ) {
-        document.getElementById("hours-worked").disabled = false;
-        document.getElementById("hours-worked").value = "";
+        document.getElementById("hours-worked-input").disabled = false;
+        document.getElementById("hours-worked-input").value = "";
         dayOff = false;
       }
     }
@@ -483,7 +483,6 @@ async function updateCalendarHours(userID){
         date: date,
         hours: hours
         });
-        console.log(userDates);
       });
 
     calendarDays.forEach(day => {
