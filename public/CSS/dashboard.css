@@ -463,7 +463,6 @@ tr:nth-child(even) {
 
 .no-data-row{
   text-align: center;
-  /* display: none; */
 }
 
 .see-more,
@@ -752,6 +751,11 @@ tr:nth-child(even) {
   background-color: rgba(0, 116, 204, 0.5);
 }
 
+.day .hours.day-off{
+  border-left: 3px solid var(--Crimson-Red);
+  background-color: rgba(204, 65, 0, 0.5);
+}
+
 @media screen and (min-width: 1440px) {
   .progress circle {
     margin: 0 auto;
@@ -820,6 +824,11 @@ tr:nth-child(even) {
     border-left: none;
     border-radius: 50%;
     background-color: rgba(0, 116, 204, 0.5);
+  }
+
+  .day .hours.day-off{
+    border-left: none;
+    background-color: rgba(204, 65, 0, 0.5);
   }
 }
 
