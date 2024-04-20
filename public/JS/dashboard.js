@@ -193,9 +193,12 @@ prevMonth.addEventListener("click", () =>{
     month = 11;
     year = year - 1;
     loadDays();
+    updateCards(userID);
   }
+  else
   {
     loadDays();
+    updateCards(userID);
   }
 });
 
@@ -205,9 +208,11 @@ nextMonth.addEventListener("click", () =>{
     month = 0;
     year = year + 1;
     loadDays();
+    updateCards(userID);
   }
   else{
     loadDays();
+    updateCards(userID);
   }
 });
 
@@ -403,6 +408,7 @@ async function updateCards(userID) {
     try {
       const userDocRef = doc(db, "users", collectionID);
       const querySnapshot = await getDocs(collection(userDocRef, "hours"));
+      const monthlySalary = [];
       let salary = 0;
       let workingDays = 0;
       let daysOff = 0;
@@ -410,11 +416,16 @@ async function updateCards(userID) {
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          if (data.hours > 0) {
-            workingDays++;
-            totalHours += parseInt(data.hours);
-          } else if (data.hours) {
-            daysOff++;
+          let hoursMonth = new Date(data.date).getMonth();
+  
+          if(month === hoursMonth){
+            console.log(data.hours);
+            if (data.hours > 0) {
+              workingDays++;
+              totalHours += parseInt(data.hours);
+            } else if (data.hours) {
+              daysOff++;
+            }
           }
         });
       }
