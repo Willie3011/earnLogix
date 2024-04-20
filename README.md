@@ -10,9 +10,9 @@ At EarnLogix, our mission is to empower individuals with a seamless and intellig
 - HTML
 - CSS
 - JavaScript
-- Node.js
-- Express.js
-- MongoDb
+- Firebase Authentication
+- Firebase cloud Firestore
+- Firebase Hosting
 
 ## System Development Lifecycle Phases for EarnLogix
 
