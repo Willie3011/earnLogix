@@ -84,12 +84,6 @@
               alt="profile-picture"
               class="profile-pic" />
           </button>
-          <div class="dropdownContent">
-            <a href="./profile.html">Profile</a>
-            <a href="./settings.html">Settings</a>
-            <a href="./help.html">Help & Support</a>
-            <a href="#logout">Logout</a>
-          </div>
         </div>
       </header>
 
@@ -184,21 +178,24 @@
             <h3>Hours Worked</h3>
             <a href="#" class="addBtn">Add Hours</a>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Day</th>
-                <th>Hours Worked</th>
-                <th>Daily Total</th>
-              </tr>
-            </thead>
-            <tbody id="input-history">
-              <tr class="no-data-row">
-                <td>No data</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="tableWrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Day</th>
+                  <th>Hours</th>
+                  <th>Total (R)</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="input-history">
+                <tr class="no-data-row">
+                  <td>No data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <div class="footer">
             <a href="#" class="see-more">See More</a>
@@ -233,13 +230,24 @@
               <div>
                 <label for="working-day">
                   <span>Working day</span>
-                  <input class="radio-btn" type="radio" name="working-day" id="working-day" value="Working-day" checked/>
+                  <input
+                    class="radio-btn"
+                    type="radio"
+                    name="working-day"
+                    id="working-day"
+                    value="Working-day"
+                    checked />
                 </label>
               </div>
               <div>
                 <label for="day-off">
                   <span>Day-off</span>
-                  <input class="radio-btn" type="radio" name="working-day" value="Day-off" id="day-off" />
+                  <input
+                    class="radio-btn"
+                    type="radio"
+                    name="working-day"
+                    value="Day-off"
+                    id="day-off" />
                 </label>
               </div>
             </div>
@@ -247,10 +255,11 @@
             <input
               type="number"
               id="hours-worked-input"
-              placeholder="Add Hours Worked" 
-              pattern="[0-9]" required/>
+              placeholder="Add Hours Worked"
+              pattern="[0-9]"
+              required />
             <label for="date">Date</label>
-            <input type="date" id="date" required/>
+            <input type="date" id="date" required />
             <span id="error"></span>
           </div>
           <div class="footer">
