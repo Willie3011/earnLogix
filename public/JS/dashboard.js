@@ -12,6 +12,7 @@ import {
   addDoc,
   getDoc,
   getDocs,
+  deleteDoc,
   query,
   where,
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
@@ -124,7 +125,6 @@ let year = currentDate.getFullYear();
 let month = currentDate.getMonth();
 
 function loadDays() {
-
   //previous month days
   const prevLastDay = new Date(year, month, 0);
   const prevDays = prevLastDay.getDate();
@@ -161,7 +161,11 @@ function loadDays() {
   for (let i = 1; i <= numOfDays; i++) {
     //check if date is today
     let day;
-    const dateAttribute = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
+    const dateAttribute = `${currentDate.getFullYear()}-${(
+      currentDate.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${currentDay.toString().padStart(2, "0")}`;
     if (
       i === currentDate.getDate() &&
       year === currentDate.getFullYear() &&
@@ -186,33 +190,34 @@ function loadDays() {
 const prevMonth = document.querySelector(".prev-month");
 const nextMonth = document.querySelector(".next-month");
 
-prevMonth.addEventListener("click", () =>{
-  month = month - 1
-  
-  if(month < 0){
+prevMonth.addEventListener("click", () => {
+  month = month - 1;
+
+  if (month < 0) {
     month = 11;
     year = year - 1;
     loadDays();
     updateCards(userID);
-  }
-  else
-  {
+    displayHoursInTable(userID);
+  } else {
     loadDays();
     updateCards(userID);
+    displayHoursInTable(userID);
   }
 });
 
-nextMonth.addEventListener("click", () =>{
+nextMonth.addEventListener("click", () => {
   month = month + 1;
-  if(month > 11){
+  if (month > 11) {
     month = 0;
     year = year + 1;
     loadDays();
     updateCards(userID);
-  }
-  else{
+    displayHoursInTable(userID);
+  } else {
     loadDays();
     updateCards(userID);
+    displayHoursInTable(userID);
   }
 });
 
@@ -281,10 +286,10 @@ async function saveHours() {
     };
 
     try {
-      const collectionID = await getUserCollectionID(userID);
+      const userDocID = await getUserDocID(userID);
       // Ensure collectionID is defined before proceeding
-      if (collectionID) {
-        const userDocRef = doc(db, "users", collectionID);
+      if (userDocID) {
+        const userDocRef = doc(db, "users", userDocID);
         const hoursCollection = collection(userDocRef, "hours");
 
         //check if the date entered already exists in the database
@@ -318,11 +323,13 @@ async function saveHours() {
 //update input history with data
 async function displayHoursInTable(userID) {
   const hoursTable = document.getElementById("input-history");
+
   try {
-    let collectionID = await getUserCollectionID(userID);
+    //get the user document ID
+    let userDocID = await getUserDocID(userID);
     let hourlyRate;
-    // Ensure collectionID is defined before proceeding
-    const userDocRef = doc(db, "users", collectionID);
+    // Ensure user document ID is defined before proceeding
+    const userDocRef = doc(db, "users", userDocID);
 
     const userDoc = await getDoc(userDocRef);
     if (userDoc.exists()) {
@@ -339,32 +346,51 @@ async function displayHoursInTable(userID) {
     // Loop through the query snapshot
     querySnapshot.forEach((doc) => {
       const data = doc.data();
+      let hoursMonth = new Date(data.date).getMonth();
+
+      //get hour document ID
+      const hoursID = doc.id;
+      if (month === hoursMonth) {
+        const row = document.createElement("tr");
+        // Add cells for each data field
+        let date = new Date(data.date);
+        const dateCell = document.createElement("td");
+        dateCell.textContent = formatDate(date);
+        row.appendChild(dateCell);
+
+        const dayOfWeekCell = document.createElement("td");
+        const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"][
+          date.getDay()
+        ];
+        dayOfWeekCell.textContent = dayOfWeek;
+        row.appendChild(dayOfWeekCell);
+
+        const hoursWorkedCell = document.createElement("td");
+        hoursWorkedCell.textContent =
+          data.hours === "0" ? "Day off" : data.hours;
+        row.appendChild(hoursWorkedCell);
+
+        const totalAmountCell = document.createElement("td");
+        const totalAmount = data.hours * hourlyRate;
+        totalAmountCell.textContent = totalAmount.toFixed(2); 
+        row.appendChild(totalAmountCell);
+
+        const actionCell = document.createElement("td");
+        const deleteButton = document.createElement("button");
+        const icon = document.createElement("i");
+        icon.classList = "bx bxs-trash";
+        deleteButton.append(icon);
+        deleteButton.classList.add("deleteBtn");
+        // Add event listener to delete button
+        deleteButton.addEventListener("click", () => deleteHoursDoc(hoursID));
+        actionCell.append(deleteButton);
+        row.append(actionCell);
+        rows.push(row);
+      }
       // Create a table row for each document
-      const row = document.createElement("tr");
-
-      // Add cells for each data field
-      let date = new Date(data.date);
-      const dateCell = document.createElement("td");
-      dateCell.textContent = formatDate(date);
-      row.appendChild(dateCell);
-
-      const dayOfWeekCell = document.createElement("td");
-      const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"][
-        date.getDay()
-      ];
-      dayOfWeekCell.textContent = dayOfWeek;
-      row.appendChild(dayOfWeekCell);
-
-      const hoursWorkedCell = document.createElement("td");
-      hoursWorkedCell.textContent = data.hours === "0" ? "Day off" : data.hours;
-      row.appendChild(hoursWorkedCell);
-
-      const totalAmountCell = document.createElement("td");
-      const totalAmount = data.hours * hourlyRate;
-      totalAmountCell.textContent = totalAmount.toFixed(2); // Assuming you want to display the amount with two decimal places
-      row.appendChild(totalAmountCell);
-      rows.push(row);
     });
+
+    //sort the rows by date
     rows.sort((a, b) => {
       const dateA = new Date(a.cells[0].textContent);
       const dateB = new Date(b.cells[0].textContent);
@@ -378,7 +404,27 @@ async function displayHoursInTable(userID) {
   }
 }
 
-async function getUserCollectionID(userID) {
+async function deleteHoursDoc(hoursDocID) {
+  // Reference to the user document
+  try {
+    //get the user document ID
+    const userDocID = await getUserDocID(userID);
+    const userDocRef = doc(db, "users", userDocID);
+    
+    // Reference to the specific document within the nested 'hours' collection
+    const hoursDocRef = doc(collection(userDocRef, "hours"), hoursDocID);
+    
+    await deleteDoc(hoursDocRef).then(() => {
+      updateCards(userID);
+      displayHoursInTable(userID);
+      updateCalendarHours(userID);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getUserDocID(userID) {
   const usersCollection = collection(db, "users");
   let collectionID;
   try {
@@ -402,13 +448,14 @@ async function getUserCollectionID(userID) {
 }
 
 async function updateCards(userID) {
-  const collectionID = await getUserCollectionID(userID);
+  //get the user document ID
+  const userDocID = await getUserDocID(userID);
 
-  if (collectionID) {
+  if (userDocID) {
     try {
-      const userDocRef = doc(db, "users", collectionID);
+      const userDocRef = doc(db, "users", userDocID);
       const querySnapshot = await getDocs(collection(userDocRef, "hours"));
-      const monthlySalary = [];
+      
       let salary = 0;
       let workingDays = 0;
       let daysOff = 0;
@@ -417,9 +464,9 @@ async function updateCards(userID) {
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           let hoursMonth = new Date(data.date).getMonth();
-  
-          if(month === hoursMonth){
-            console.log(data.hours);
+
+          //check if month from database matches the current month on the calendar
+          if (month === hoursMonth) {
             if (data.hours > 0) {
               workingDays++;
               totalHours += parseInt(data.hours);
@@ -461,67 +508,64 @@ async function updateCards(userID) {
   }
 }
 
-async function getHoursCollection(collectionID) {
-  if(collectionID){
+async function getHoursCollection(userDocID) {
+  if (userDocID) {
     try {
-      const userDocRef = await doc(db, "users", collectionID);
+      const userDocRef = await doc(db, "users", userDocID);
       const hoursCollection = await collection(userDocRef, "hours");
 
       return hoursCollection;
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
-  else{
+  } else {
     return null;
   }
 }
 
-async function updateCalendarHours(userID){
-  const collectionID = await getUserCollectionID(userID);
+async function updateCalendarHours(userID) {
+  const userDocID = await getUserDocID(userID);
 
-  const hoursCollection = await getHoursCollection(collectionID);
+  const hoursCollection = await getHoursCollection(userDocID);
   const calendarDays = document.querySelectorAll(".day");
   const querySnapshot = await getDocs(hoursCollection);
 
   //if the user has hours in the database
-  if(!querySnapshot.empty){
+  if (!querySnapshot.empty) {
     const userDates = [];
-      querySnapshot.forEach(doc => {
-        const date = doc.data().date;
-        const hours = doc.data().hours;
-        userDates.push({
+    querySnapshot.forEach((doc) => {
+      const date = doc.data().date;
+      const hours = doc.data().hours;
+      userDates.push({
         date: date,
-        hours: hours
-        });
+        hours: hours,
       });
+    });
 
-    calendarDays.forEach(day => {
+    calendarDays.forEach((day) => {
       let date = day.dataset.date;
-      for(let i = 0; i < userDates.length; i++){
+      for (let i = 0; i < userDates.length; i++) {
         if (userDates[i].date === date) {
           // Create a div to display hours
           const hoursDiv = document.createElement("div");
           hoursDiv.classList.add("hours");
-          if(userDates[i].hours === "0"){
+          if (userDates[i].hours === "0") {
             //Display day off
             hoursDiv.textContent = "Day off";
             hoursDiv.classList.add("day-off");
-          }
-          else{
+          } else {
             //Display hours
-            hoursDiv.textContent = userDates[i].hours + " hours"; 
+            hoursDiv.textContent = userDates[i].hours + " hours";
           }
-        day.appendChild(hoursDiv);
-      }
+          day.appendChild(hoursDiv);
+        }
       }
     });
   }
   //if the user has no hours in the database
-  else{
+  else {
     loadDays();
   }
-  
 }
 
 //formatting the date for the table

@@ -71,40 +71,6 @@ header #header-toggle-btn {
   border: none;
 }
 
-.dropdownContent {
-  top: -100%;
-  right: 0;
-  position: absolute;
-  transition: all 0.3s ease;
-}
-
-.dropdownContent.active {
-  position: absolute;
-  display: block;
-  width: 200px;
-  height: auto;
-  top: 60px;
-  right: 4%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background: var(--honeydew);
-  z-index: 1;
-}
-
-.dropdownContent a {
-  color: var(--Dark-text);
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.dropdownContent a:hover {
-  transform: scale(0.98);
-  color: var(--Crimson-Red);
-}
-
 .profile-pic {
   width: 40px;
   height: 40px;
@@ -482,6 +448,20 @@ tr:nth-child(even) {
   display: none;
 }
 
+.deleteBtn{
+  padding: 5px 10px;
+  margin: auto;
+  border-radius: 5px;
+  background-color: #e63947c9;
+  color: var(--White-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.deleteBtn:hover{
+  background-color: var(--Crimson-Red);
+}
 /* Income tracking section */
 .income-tracking {
   height: auto;
@@ -842,6 +822,9 @@ tr:nth-child(even) {
   .progress circle {
     cx: 70;
   }
+  .dataTable .tableWrapper{
+    overflow-x: auto;
+  }
   .calendar-btns .month-btns {
     gap: 0 5px;
   }
@@ -857,6 +840,8 @@ tr:nth-child(even) {
 }
 
 @media screen and (max-width: 280px) {
+  
+
   .calendar .weekdays {
     font-size: 14px;
     margin-left: -10px;
