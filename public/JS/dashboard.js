@@ -124,6 +124,7 @@ let year = currentDate.getFullYear();
 //get month
 let month = currentDate.getMonth();
 
+
 function loadDays() {
   //previous month days
   const prevLastDay = new Date(year, month, 0);
@@ -161,8 +162,8 @@ function loadDays() {
   for (let i = 1; i <= numOfDays; i++) {
     //check if date is today
     let day;
-    const dateAttribute = `${currentDate.getFullYear()}-${(
-      currentDate.getMonth() + 1
+    const dateAttribute = `${year}-${(
+      month + 1
     )
       .toString()
       .padStart(2, "0")}-${currentDay.toString().padStart(2, "0")}`;
@@ -197,10 +198,12 @@ prevMonth.addEventListener("click", () => {
     month = 11;
     year = year - 1;
     loadDays();
+    updateCalendarHours(userID);
     updateCards(userID);
     displayHoursInTable(userID);
   } else {
     loadDays();
+    updateCalendarHours(userID);
     updateCards(userID);
     displayHoursInTable(userID);
   }
@@ -212,10 +215,12 @@ nextMonth.addEventListener("click", () => {
     month = 0;
     year = year + 1;
     loadDays();
+    updateCalendarHours(userID);
     updateCards(userID);
     displayHoursInTable(userID);
   } else {
     loadDays();
+    updateCalendarHours(userID);
     updateCards(userID);
     displayHoursInTable(userID);
   }
@@ -303,7 +308,10 @@ async function saveHours() {
         } else {
           //create new document
           await addDoc(hoursCollection, hoursObj);
+
+          //reload the UI elements
           await updateCards(userID);
+          await displayHoursInTable(userID);
           await displayHoursInTable(userID);
           //close modal and remove overlay
           addHoursModal.classList.remove("active");
@@ -372,7 +380,7 @@ async function displayHoursInTable(userID) {
 
         const totalAmountCell = document.createElement("td");
         const totalAmount = data.hours * hourlyRate;
-        totalAmountCell.textContent = totalAmount.toFixed(2); 
+        totalAmountCell.textContent = totalAmount.toFixed(2);
         row.appendChild(totalAmountCell);
 
         const actionCell = document.createElement("td");
@@ -410,10 +418,10 @@ async function deleteHoursDoc(hoursDocID) {
     //get the user document ID
     const userDocID = await getUserDocID(userID);
     const userDocRef = doc(db, "users", userDocID);
-    
+
     // Reference to the specific document within the nested 'hours' collection
     const hoursDocRef = doc(collection(userDocRef, "hours"), hoursDocID);
-    
+
     await deleteDoc(hoursDocRef).then(() => {
       updateCards(userID);
       displayHoursInTable(userID);
@@ -455,7 +463,7 @@ async function updateCards(userID) {
     try {
       const userDocRef = doc(db, "users", userDocID);
       const querySnapshot = await getDocs(collection(userDocRef, "hours"));
-      
+
       let salary = 0;
       let workingDays = 0;
       let daysOff = 0;
@@ -533,6 +541,7 @@ async function updateCalendarHours(userID) {
   //if the user has hours in the database
   if (!querySnapshot.empty) {
     const userDates = [];
+    //add the hours documents in an array
     querySnapshot.forEach((doc) => {
       const date = doc.data().date;
       const hours = doc.data().hours;
@@ -542,29 +551,31 @@ async function updateCalendarHours(userID) {
       });
     });
 
+    //add the hours to the calendar
     calendarDays.forEach((day) => {
       let date = day.dataset.date;
       for (let i = 0; i < userDates.length; i++) {
-        if (userDates[i].date === date) {
-          // Create a div to display hours
-          const hoursDiv = document.createElement("div");
-          hoursDiv.classList.add("hours");
-          if (userDates[i].hours === "0") {
-            //Display day off
-            hoursDiv.textContent = "Day off";
-            hoursDiv.classList.add("day-off");
-          } else {
-            //Display hours
-            hoursDiv.textContent = userDates[i].hours + " hours";
+        let hoursMonth = new Date(userDates[i].date).getMonth();
+        //if the date is in the current month
+        if (hoursMonth === month) {
+          //compare the current date with the date from the database
+          if (userDates[i].date === date) {
+            // Create a div to display hours
+            const hoursDiv = document.createElement("div");
+            hoursDiv.classList.add("hours");
+            if (userDates[i].hours === "0") {
+              //Display day off
+              hoursDiv.textContent = "Day off";
+              hoursDiv.classList.add("day-off");
+            } else {
+              //Display hours
+              hoursDiv.textContent = userDates[i].hours + " hours";
+            }
+            day.appendChild(hoursDiv);
           }
-          day.appendChild(hoursDiv);
         }
       }
     });
-  }
-  //if the user has no hours in the database
-  else {
-    loadDays();
   }
 }
 
